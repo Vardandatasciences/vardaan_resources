@@ -1,0 +1,379 @@
+/* Add more modern keyframe animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Footer styling based on the provided design */
+/* Add animations */
+@keyframes waveAnimation {
+  0% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-5px) scaleY(1.05); }
+  100% { transform: translateY(0) scaleY(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowEffect {
+  0% { box-shadow: 0 0 5px rgba(26, 115, 232, 0.1); }
+  50% { box-shadow: 0 0 15px rgba(26, 115, 232, 0.3); }
+  100% { box-shadow: 0 0 5px rgba(26, 115, 232, 0.1); }
+}
+
+@keyframes shine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.footer {
+  position: relative;
+  background-color: #e6f7ff; /* Changed to light blue background */
+  color: #000;
+  font-family: 'Arial', sans-serif;
+  padding: 50px 0 20px;
+  margin-top: 100px; /* Increased to accommodate larger curve */
+  width: 100%;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.5s ease;
+}
+
+.footer:hover {
+  box-shadow: 0 -8px 25px rgba(26, 115, 232, 0.1);
+}
+
+/* Wave at the top of footer */
+.footer-wave {
+  position: absolute;
+  top: -120px; /* Increased to make curve larger */
+  left: 0;
+  width: 100%;
+  height: 120px; /* Increased height for larger curve */
+  background-color: #4fc3f7;
+  background-image: linear-gradient(135deg, #4fc3f7 0%, #1a73e8 100%);
+  clip-path: path('M0,0 C400,120 800,0 1440,120 L1440,0 L0,0 Z'); /* Modified curve to be larger */
+  animation: waveAnimation 6s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add a shimmering light effect to the wave */
+.footer-wave::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shine 4s infinite linear;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  padding: 0 15px;
+  margin-bottom: 30px;
+  text-align: left;
+  animation: fadeIn 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.footer-column:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.footer-column:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.footer-column:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.footer-column:nth-child(4) {
+  animation-delay: 0.7s;
+}
+
+.footer-column h3 {
+  color: #1a73e8; /* Changed to blue color */
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-column h3:hover {
+  transform: translateX(5px);
+  color: #4fc3f7;
+}
+
+.footer-column h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 40px;
+  height: 2px;
+  background-color: #1a73e8; /* Changed to blue color */
+  background-image: linear-gradient(90deg, #1a73e8, #4fc3f7);
+  background-size: 200% auto;
+  animation: shimmer 3s infinite linear;
+  transition: width 0.3s ease;
+}
+
+.footer-column h3:hover::after {
+  width: 100%;
+}
+
+.footer-column p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #000; /* Changed from #555 to black */
+  max-width: 300px;
+  text-align: left;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-column p:hover {
+  color: #000; /* Changed from #333 to black */
+  transform: translateY(-2px);
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.footer-column ul li:hover {
+  transform: translateX(5px);
+}
+
+.footer-column ul li a {
+  color: #000; /* Changed from #555 to black */
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.footer-column ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #1a73e8;
+  transition: width 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: #1a73e8; /* Changed to blue color */
+}
+
+.footer-column ul li a:hover::after {
+  width: 100%;
+}
+
+/* Contact info styling */
+.contact-info {
+  font-style: normal;
+  font-size: 14px;
+  color: #000; /* Changed from #555 to black */
+}
+
+.location-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding: 5px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.location-item:hover {
+  background-color: rgba(26, 115, 232, 0.05);
+  transform: translateX(5px);
+}
+
+.location-item i {
+  color: #1a73e8; /* Changed to blue color */
+  margin-right: 10px;
+  font-size: 16px;
+  margin-top: 3px;
+  transition: transform 0.3s ease;
+}
+
+.location-item:hover i {
+  transform: scale(1.2);
+}
+
+.location-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-text p {
+  margin: 0 0 3px 0;
+  line-height: 1.4;
+  color: #000; /* Ensuring all text is black */
+}
+
+.company-name {
+  font-weight: 600;
+  color: #000; /* Changed from #333 to black */
+  margin-bottom: 5px !important;
+}
+
+/* Phone and email styles */
+.contact-info > p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  color: #000; /* Ensuring all text is black */
+}
+
+.contact-info > p:hover {
+  background-color: rgba(26, 115, 232, 0.05);
+  transform: translateX(5px);
+}
+
+.contact-info > p i {
+  color: #1a73e8; /* Changed to blue color */
+  margin-right: 10px;
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.contact-info > p:hover i {
+  transform: scale(1.2) rotate(15deg);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #c8e3ff; /* Changed to light blue border */
+  margin-top: 20px;
+  background-color: #d5efff; /* Changed to slightly darker light blue */
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-bottom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #1a73e8, transparent);
+  transform: translateX(-50%);
+  transition: width 0.5s ease;
+}
+
+.footer:hover .footer-bottom::before {
+  width: 80%;
+}
+
+.footer-bottom p {
+  color: #000; /* Changed from #555 to black */
+  font-size: 14px;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.footer-bottom p:hover {
+  color: #1a73e8;
+  transform: translateY(-2px);
+}
+
+/* Glow effect for important elements */
+.company-name:hover,
+.footer-column h3:hover {
+  animation: glowEffect 2s infinite ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+  }
+  
+  .footer-column {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 30px;
+  }
+  
+  .footer-column:not(:last-child) {
+    margin-bottom: 30px;
+  }
+  
+  .footer-wave {
+    top: -60px;
+    height: 60px;
+  }
+} 

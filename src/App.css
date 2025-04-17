@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding-top: 72px; /* Height of navbar + some extra space */
 }
 
 .App-logo {
@@ -34,5 +35,17 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 991px) {
+  .App {
+    padding-top: 64px;
   }
 }
