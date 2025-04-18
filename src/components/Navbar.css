@@ -8,39 +8,68 @@
   z-index: 1000;
 }
 
-/* The contact-bar and contact-info styles kept as comments for reference
-.contact-bar {
-  background-color: #0089ba;
-  color: white;
-  padding: 8px 0;
-}
-
-.contact-info {
+/* Container to add space between sections */
+.navbar .container {
   display: flex;
-  justify-content: flex-end;
-  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.contact-item {
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
+/* Logo section styling */
+.navbar-logo-section {
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: opacity 0.3s ease;
+  flex-shrink: 0;
+  margin-right: auto;
 }
 
-.contact-item:hover {
-  opacity: 0.85;
+/* New contact button styles */
+.contact-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: 15px;
+}
+
+.contact-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  border: 1px solid #333;
+  border-radius: 25px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.contact-button i {
+  margin-right: 8px;
+}
+
+.contact-button:hover {
+  background-color: #0066cc;
+  border-color: #0066cc;
   color: white;
 }
 
-.contact-item i {
-  font-size: 16px;
+/* WhatsApp button specific style */
+.contact-button:has(.fa-whatsapp) {
+  background-color: #25D366;
+  border-color: #25D366;
+  color: white;
 }
-*/
 
+.contact-button:has(.fa-whatsapp):hover {
+  opacity: 0.9;
+}
+
+/* Navigation section styling */
+.navbar-collapse {
+  flex-grow: 0;
+  margin-left: auto;
+}
+
+/* Original styles below */
 .navbar {
   padding: 0.75rem 0;
 }
@@ -104,12 +133,39 @@
 }
 
 @media (max-width: 991px) {
+  .navbar .container {
+    flex-wrap: wrap;
+  }
+  
+  .navbar-logo-section {
+    margin-right: 0;
+  }
+  
+  .contact-buttons {
+    display: none; /* Hide on mobile */
+  }
+  
+  /* Add mobile contact buttons to navbar collapse */
+  .navbar-collapse .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .navbar-collapse .contact-button {
+    margin-bottom: 8px;
+    justify-content: center;
+  }
+  
   .navbar-collapse {
     background: white;
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     margin-top: 1rem;
+    width: 100%;
   }
 
   .navbar-nav {
@@ -129,10 +185,8 @@
   .dropdown-item {
     padding: 0.5rem 1rem;
   }
-  
-  /* Removed contact-info styles for mobile */
 }
 
 @media (max-width: 576px) {
-  /* Removed contact-info styles for small screens */
+  /* Additional small screen styles if needed */
 } 

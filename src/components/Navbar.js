@@ -15,9 +15,19 @@ const Navbar = () => {
     <header className="navbar-wrapper">
       <nav className="navbar navbar-expand-lg">
         <div className="container">
-          <Link className="navbar-brand" to="/" onClick={scrollToTop}>
-            <img src={logo} className="logo" alt="LOGO" />
-          </Link>
+          <div className="navbar-logo-section">
+            <Link className="navbar-brand" to="/" onClick={scrollToTop}>
+              <img src={logo} className="logo" alt="LOGO" />
+            </Link>
+            <div className="contact-buttons">
+              <a href="tel:+919966222370" className="contact-button">
+                <i className="fas fa-phone"></i> Call Us
+              </a>
+              <a href="mailto:info@vardaanresources.com" className="contact-button">
+                <i className="fas fa-envelope"></i> Email Us
+              </a>
+            </div>
+          </div>
           
           <button 
             className="navbar-toggler" 
