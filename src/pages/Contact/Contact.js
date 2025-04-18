@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Contact.css';
-
 import Footer from '../../components/Footer'; 
+import NextPageCTA from '../../components/NextPageCTA';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     fullname: '',
     phone: '',
     email: '',
+    subject: '',
     message: ''
   });
   
@@ -18,17 +19,25 @@ const Contact = () => {
   });
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [activeOffice, setActiveOffice] = useState('mumbai');
   const [isVisible, setIsVisible] = useState(false);
+  const [animatedCards, setAnimatedCards] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   
   // Refs for scroll animation elements
   const sectionIntroRef = useRef(null);
-  const officeTabsRef = useRef(null);
+  const contactInfoRef = useRef(null);
   const contactFormRef = useRef(null);
+  const mapRef = useRef(null);
+  const modalRef = useRef(null);
   
   useEffect(() => {
     setIsLoaded(true);
     setIsVisible(true);
+    
+    // Animate cards with staggered delay
+    setTimeout(() => {
+      setAnimatedCards(true);
+    }, 500);
     
     // Set up intersection observer for scroll animations
     const observerOptions = {
@@ -53,11 +62,21 @@ const Contact = () => {
     animatedElements.forEach(el => {
       observer.observe(el);
     });
+
+    // Close modal when clicking outside of it
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setShowModal(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
     
     return () => {
       if (observer) {
         observer.disconnect();
       }
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -78,11 +97,15 @@ const Contact = () => {
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Reset form and show success message
+      // Show the modal instead of the inline success message
+      setShowModal(true);
+      
+      // Reset form
       setFormData({
         fullname: '',
         phone: '',
         email: '',
+        subject: '',
         message: ''
       });
       
@@ -98,263 +121,209 @@ const Contact = () => {
     }
   };
 
-  const toggleOffice = (office) => {
-    setActiveOffice(office);
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
     <div>
-    <div className={`contact-page ${isLoaded ? 'loaded' : ''}`}>
-      {/* Hero Section */}
-      <section className={`contact-hero ${isVisible ? 'visible' : ''}`}>
-        <div className="contact-hero-overlay"></div>
-        <div className="container">
-          <div className="hero-content">
-            <h1 className="animate-on-load">Contact Us</h1>
-            <div className="breadcrumb-wrapper animate-on-load">
-              {/* <ul className="breadcrumb">
-                <li><Link to="/"><i className="fas fa-home"></i> Home</Link></li>
-                <li className="active">Contact Us</li>
-              </ul> */}
+      <div className={`contact-page ${isLoaded ? 'loaded' : ''}`}>
+        {/* Hero Section */}
+        <section className={`contact-hero ${isVisible ? 'visible' : ''}`}>
+          <div className="floating-squares">
+            <div className="square"></div>
+            <div className="square"></div>
+            <div className="square"></div>
+            <div className="square"></div>
+            <div className="square"></div>
+            <div className="square"></div>
+          </div>
+          <div className="container">
+            <div className="hero-content">
+              <h1 className="animate-on-load">Contact Us</h1>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Section */}
-      <section className={`contact-section ${isVisible ? 'visible' : ''}`}>
-        <div className="container">
-          <div className="section-intro animate-on-scroll" ref={sectionIntroRef}>
-            <h2 className="section-title">Get in Touch</h2>
-            <p className="section-subtitle">We'd love to hear from you. Here's how you can reach us...</p>
-          </div>
+        {/* Contact Section */}
+        <section className={`contact-section ${isVisible ? 'visible' : ''}`}>
+          <div className="container">
+            {/* Contact Information Cards */}
+            <div className="contact-info-section animate-on-scroll" ref={contactInfoRef}>
+              <div className={`contact-cards ${animatedCards ? 'animated' : ''}`}>
+                <div className="contact-card" style={{animationDelay: '0.1s'}}>
+                  <div className="contact-card-icon">
+                    <i className="fas fa-map-marker-alt"></i>
+                  </div>
+                  <h3>Our Location</h3>
+                  <p>Vardaan Resources Pvt. Ltd.</p>
+                  <p>Aurum, 1st Floor, Plot no 57, Jayabheri Enclave, Phase 2, Gachibowli, Hyderabad - 500 032 INDIA.</p>
+                </div>
+                
+                <div className="contact-card" style={{animationDelay: '0.3s'}}>
+                  <div className="contact-card-icon">
+                    <i className="fas fa-phone-volume"></i>
+                  </div>
+                  <h3>Phone Number</h3>
+                  <p>+91 99662 22370</p>
+                </div>
+                
+                <div className="contact-card" style={{animationDelay: '0.5s'}}>
+                  <div className="contact-card-icon">
+                    <i className="fas fa-envelope-open-text"></i>
+                  </div>
+                  <h3>Email Us</h3>
+                  <p>contact@vardaanresources.com</p>
+                </div>
+                
+                <div className="contact-card" style={{animationDelay: '0.7s'}}>
+                  <div className="contact-card-icon">
+                    <i className="fas fa-business-time"></i>
+                  </div>
+                  <h3>Working Hours</h3>
+                  <p>8:00 - 16:00</p>
+                </div>
+              </div>
+            </div>
           
-          <div className="office-tabs animate-on-scroll" ref={officeTabsRef}>
-            <div className="tab-buttons">
-              <button 
-                className={`tab-btn ${activeOffice === 'mumbai' ? 'active' : ''}`} 
-                onClick={() => toggleOffice('mumbai')}
-              >
-                Mumbai Office
-              </button>
-              <button 
-                className={`tab-btn ${activeOffice === 'hyderabad' ? 'active' : ''}`} 
-                onClick={() => toggleOffice('hyderabad')}
-              >
-                Hyderabad Office
-              </button>
-            </div>
-            
-            <div className="tab-content">
-              <div className={`office-content ${activeOffice === 'mumbai' ? 'active' : ''}`} id="mumbai">
-                <div className="office-card animate-on-scroll">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="office-details">
-                        <h3 className="office-title">Mumbai <span>Registered Office</span></h3>
-                        <div className="address-item">
-                          <div className="icon-box">
-                            <i className="fas fa-map-marker-alt"></i>
-                          </div>
-                          <div className="content">
-                            <h4>Address</h4>
-                            <p>Vardaan Resources Pvt. Ltd.</p>
-                            <p>No.48, 6th Floor, Tardeo AC Market, Tardeo, Mumbai – 400 034, Maharashtra, INDIA.</p>
-                          </div>
-                        </div>
-                        <div className="address-item">
-                          <div className="icon-box">
-                            <i className="fas fa-envelope"></i>
-                          </div>
-                          <div className="content">
-                            <h4>Email Address</h4>
-                            <p><a href="mailto:contact@vardaanresources.com">contact@vardaanresources.com</a></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="map-wrapper">
-                        <iframe 
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.0643661506756!2d72.81144537426567!3d18.972764555207196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce704daecd27%3A0xddfe1e79b1d2d93b!2sTardeo%20AC%20Market%2C%20Dadasaheb%20Vichare%20Rd%2C%20Janata%20Nagar%2C%20Tardeo%2C%20Mumbai%2C%20Maharashtra%20400034!5e0!3m2!1sen!2sin!4v1701322759082!5m2!1sen!2sin" 
-                          width="100%" 
-                          height="100%" 
-                          style={{ border: 0 }} 
-                          allowFullScreen 
-                          loading="lazy" 
-                          referrerPolicy="no-referrer-when-downgrade"
-                          title="Mumbai Office Map"
-                        ></iframe>
-                      </div>
-                    </div>
+            {/* Map and Contact Form Section - Side by Side */}
+            <div className="map-form-section animate-on-scroll">
+              <div className="row">
+                <div className="col-md-6" ref={mapRef}>
+                  {/* Map */}
+                  <div className="map-wrapper">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.255718434639!2d78.3564716713452!3d17.447470564518333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93318bc85167%3A0x121d25c11fd5e289!2sAurum!5e0!3m2!1sen!2sin!4v1701322901964!5m2!1sen!2sin" 
+                      width="100%" 
+                      height="100%" 
+                      style={{ border: 0 }} 
+                      allowFullScreen 
+                      loading="lazy" 
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Office Map"
+                    ></iframe>
                   </div>
                 </div>
-              </div>
-              
-              <div className={`office-content ${activeOffice === 'hyderabad' ? 'active' : ''}`} id="hyderabad">
-                <div className="office-card animate-on-scroll">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="office-details">
-                        <h3 className="office-title">Hyderabad <span>Office</span></h3>
-                        <div className="address-item">
-                          <div className="icon-box">
-                            <i className="fas fa-map-marker-alt"></i>
-                          </div>
-                          <div className="content">
-                            <h4>Address</h4>
-                            <p>Vardaan Resources Pvt. Ltd.</p>
-                            <p>Aurum, 1st Floor, Plot no 57, Jayabheri Enclave, Phase 2, Gachibowli, Hyderabad - 500 032 INDIA.</p>
-                          </div>
-                        </div>
-                        <div className="address-item">
-                          <div className="icon-box">
-                            <i className="fas fa-phone-alt"></i>
-                          </div>
-                          <div className="content">
-                            <h4>Phone</h4>
-                            <p><a href="tel:+919966222370">+91 99662 22370</a></p>
-                          </div>
-                        </div>
-                        <div className="address-item">
-                          <div className="icon-box">
-                            <i className="fas fa-envelope"></i>
-                          </div>
-                          <div className="content">
-                            <h4>Email Address</h4>
-                            <p><a href="mailto:contact@vardaanresources.com">contact@vardaanresources.com</a></p>
-                          </div>
+                
+                <div className="col-md-6">
+                  {/* Contact Form */}
+                  <div className="form-card" ref={contactFormRef}>
+                    <div className="form-header">
+                      <h3>Contact Us</h3>
+                      <p>We'd love to hear from you. Please fill out the form below.</p>
+                    </div>
+                    
+                    {formSubmitStatus.error && (
+                      <div className="error-message">
+                        <i className="fas fa-times-circle"></i>
+                        <p>{formSubmitStatus.error}</p>
+                      </div>
+                    )}
+                    
+                    <form className="contact-form" onSubmit={handleSubmit}>
+                      <div className="form-group">
+                        <div className="input-icon-wrapper">
+                          <i className="fas fa-user-circle input-icon"></i>
+                          <input 
+                            type="text" 
+                            className="form-control" 
+                            id="fullname"
+                            placeholder="Your Name"
+                            required 
+                            name="fullname" 
+                            value={formData.fullname}
+                            onChange={handleChange}
+                          />
                         </div>
                       </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="map-wrapper">
-                        <iframe 
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.255718434639!2d78.3564716713452!3d17.447470564518333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93318bc85167%3A0x121d25c11fd5e289!2sAurum!5e0!3m2!1sen!2sin!4v1701322901964!5m2!1sen!2sin" 
-                          width="100%" 
-                          height="100%" 
-                          style={{ border: 0 }} 
-                          allowFullScreen 
-                          loading="lazy" 
-                          referrerPolicy="no-referrer-when-downgrade"
-                          title="Hyderabad Office Map"
-                        ></iframe>
+                      
+                      <div className="form-group">
+                        <div className="input-icon-wrapper">
+                          <i className="fas fa-envelope input-icon"></i>
+                          <input 
+                            type="email" 
+                            className="form-control" 
+                            id="email"
+                            placeholder="Your Email"
+                            required 
+                            name="email" 
+                            value={formData.email}
+                            onChange={handleChange}
+                          />
+                        </div>
                       </div>
-                    </div>
+                      
+                      <div className="form-group">
+                        <div className="input-icon-wrapper">
+                          <i className="fas fa-heading input-icon"></i>
+                          <input 
+                            type="text" 
+                            className="form-control" 
+                            id="subject"
+                            placeholder="Your Subject"
+                            required 
+                            name="subject" 
+                            value={formData.subject}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="form-group">
+                        <div className="input-icon-wrapper">
+                          <i className="fas fa-comment-alt input-icon"></i>
+                          <textarea 
+                            className="form-control" 
+                            id="message"
+                            placeholder="Your Message"
+                            name="message" 
+                            value={formData.message}
+                            onChange={handleChange}
+                            rows={3}
+                          ></textarea>
+                        </div>
+                      </div>
+                      
+                      <button type="submit" className="submit-button">
+                        <span>CONTACT US</span>
+                        <i className="fas fa-paper-plane send-icon"></i>
+                      </button>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
-          <div className="contact-form-section animate-on-scroll" ref={contactFormRef}>
-            <div className="row">
-              <div className="col-lg-6 offset-lg-3">
-                <div className="form-card">
-                  <div className="form-header">
-                    <h3>Send Us a Message</h3>
-                    <p>We'd love to hear from you. Please fill out the form below.</p>
-                  </div>
-                  
-                  {formSubmitStatus.success && (
-                    <div className="success-message">
-                      <i className="fas fa-check-circle"></i>
-                      <p>{formSubmitStatus.success}</p>
-                    </div>
-                  )}
-                  
-                  {formSubmitStatus.error && (
-                    <div className="error-message">
-                      <i className="fas fa-times-circle"></i>
-                      <p>{formSubmitStatus.error}</p>
-                    </div>
-                  )}
-                  
-                  <form className="contact-form" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                      <div className="input-with-icon">
-                        <span className="input-icon">
-                          <i className="fas fa-user"></i>
-                        </span>
-                        <input 
-                          type="text" 
-                          className="form-control" 
-                          id="fullname"
-                          placeholder="Your Name *"
-                          required 
-                          name="fullname" 
-                          value={formData.fullname}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="form-group">
-                      <div className="input-with-icon">
-                        <span className="input-icon">
-                          <i className="fas fa-mobile-alt"></i>
-                        </span>
-                        <input 
-                          type="text" 
-                          className="form-control" 
-                          id="phone"
-                          placeholder="Phone No *"
-                          required 
-                          name="phone" 
-                          value={formData.phone}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="form-group">
-                      <div className="input-with-icon">
-                        <span className="input-icon">
-                          <i className="fas fa-envelope"></i>
-                        </span>
-                        <input 
-                          type="email" 
-                          className="form-control" 
-                          id="email"
-                          placeholder="Email Address *"
-                          required 
-                          name="email" 
-                          value={formData.email}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="form-group">
-                      <div className="input-with-icon textarea-icon">
-                        <span className="input-icon">
-                          <i className="fas fa-comment-dots"></i>
-                        </span>
-                        <textarea 
-                          className="form-control" 
-                          id="message"
-                          placeholder="Message *"
-                          name="message" 
-                          value={formData.message}
-                          onChange={handleChange}
-                          rows={5}
-                        ></textarea>
-                      </div>
-                    </div>
-                    
-                    <button type="submit" className="submit-button">
-                      <span>SUBMIT</span>
-                      <i className="fas fa-paper-plane"></i>
-                    </button>
-                  </form>
-                </div>
+        </section>
+
+        {/* Success Modal */}
+        {showModal && (
+          <div className="modal-overlay">
+            <div className="success-modal" ref={modalRef}>
+              <div className="modal-icon">
+                <i className="fas fa-check-circle"></i>
               </div>
+              <h3>Thank You!</h3>
+              <p>Your message has been sent successfully. Our team will get back to you shortly.</p>
+              <p className="response-time">Expected response time: 24-48 hours</p>
+              <button className="modal-close-btn" onClick={closeModal}>
+                Close
+              </button>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
-    <Footer />
+        )}
+      </div>
+      {/* Journey Navigation - Next Page CTA */}
+      <NextPageCTA 
+        title="Visit Again" 
+        description="Thank you for exploring our site. Return to our homepage to discover more about how Vardaan Resources can support your engineering needs."
+        nextPage={{
+          path: "/",
+          label: "Return to Home"
+        }}
+        headingText="RESTART YOUR JOURNEY"
+      />
+      <Footer />
     </div>
   );
 };

@@ -222,7 +222,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   position: relative;
 }
 
@@ -237,7 +237,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
   z-index: 1;
 }
@@ -859,7 +859,7 @@
 
 .section-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 /* ====== Service Cards Grid ====== */
@@ -871,9 +871,10 @@
   position: relative;
 }
 
+/* Enhanced Service Cards */
 .service-card {
   position: relative;
-  height: 280px;
+  height: 320px;
   border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
@@ -886,13 +887,33 @@
   border-bottom: 3px solid #00c2cb;
 }
 
-.service-card::before {
-  display: none;
+.service-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-.service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+/* Add a subtle shimmer effect to service cards */
+.service-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 1s ease;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.service-card:hover::after {
+  transform: translateX(50%);
 }
 
 .card-content {
@@ -963,9 +984,9 @@
   margin-bottom: 20px;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
-  max-height: 130px;
+  max-height: 160px;
 }
 
 /* Gradient colors */
@@ -997,170 +1018,136 @@
   color: #e74c3c;
 }
 
-/* Show more button */
-.show-more-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 20px;
-  background: rgba(0, 194, 203, 0.1);
-  border: 1px solid rgba(0, 194, 203, 0.3);
-  border-radius: 50px;
-  color: #00c2cb;
-  font-weight: 500;
+
+.service-card.gradient-teal {
+  border-bottom: 4px solid #008080;
+  background: linear-gradient(180deg, #ffffff 0%, #e6f7f7 100%);
+}
+
+.service-card.gradient-red {
+  border-bottom: 4px solid #dc3545;
+  background: linear-gradient(180deg, #ffffff 0%, #ffe6e8 100%);
+}
+
+.service-card.gradient-yellow {
+  border-bottom: 4px solid #ffc107;
+  background: linear-gradient(180deg, #ffffff 0%, #fff9e6 100%);
+}
+
+.service-card.gradient-pink {
+  border-bottom: 4px solid #e83e8c;
+  background: linear-gradient(180deg, #ffffff 0%, #ffe6f3 100%);
+}
+
+.service-card.gradient-indigo {
+  border-bottom: 4px solid #6610f2;
+  background: linear-gradient(180deg, #ffffff 0%, #efe6ff 100%);
+}
+
+.service-card.gradient-lime {
+  border-bottom: 4px solid #8bc34a;
+  background: linear-gradient(180deg, #ffffff 0%, #f0f7e6 100%);
+}
+
+.service-card.gradient-cyan {
+  border-bottom: 4px solid #17a2b8;
+  background: linear-gradient(180deg, #ffffff 0%, #e6f6f8 100%);
+}
+
+.service-card.gradient-amber {
+  border-bottom: 4px solid #ffbf00;
+  background: linear-gradient(180deg, #ffffff 0%, #fff8e6 100%);
+}
+
+/* Titles with clean design */
+.service-row h4 {
+  color: #3f6eb5;
+  margin: 0 0 25px;
+  font-weight: 600;
+  font-size: 1.8rem;
   transition: all 0.3s ease;
-  cursor: pointer;
-  font-size: 0.9rem;
-  margin-top: 15px;
-}
-
-.show-more-btn:hover {
-  background: rgba(0, 194, 203, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 194, 203, 0.1);
-}
-
-.show-more-btn svg {
-  transition: transform 0.3s ease;
-}
-
-.show-more-btn:hover svg {
-  transform: translateX(3px);
-}
-
-/* Service card container and expanded details */
-.service-card-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
   position: relative;
+  padding-left: 0;
+  display: inline-block;
 }
 
-.service-details-expanded {
-  grid-column: 1 / -1;
-  margin-top: 20px;
-  margin-bottom: 40px;
-  padding: 30px;
-  background: #ffffff;
-  border-radius: 15px;
-  border: 1px solid rgba(0, 194, 203, 0.1);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
-  color: #333333;
-  line-height: 1.8;
-  animation: fadeInExpand 0.5s forwards;
-  width: 100%;
-  position: relative;
-  z-index: 10;
-}
-
-.service-details-expanded::before {
+.service-row h4::after {
   content: '';
   position: absolute;
-  top: 0;
+  bottom: -8px;
   left: 0;
-  width: 5px;
-  height: 100%;
-  background: linear-gradient(to bottom, #00c2cb, #2575fc);
-  border-radius: 15px 0 0 15px;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(to right, #3f6eb5, rgba(83, 146, 224, 0.3));
+  transition: width 0.5s ease;
 }
 
-.expanded-content {
-  padding: 10px 10px 10px 20px;
+.service-row:hover h4::after {
+  width: 100%;
 }
 
-/* Typography in expanded content */
-.expanded-content h5 {
-  color: #333333;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  font-weight: 600;
-  border-left: 3px solid #6a11cb;
-  padding-left: 15px;
-}
-
-.expanded-content p {
-  margin-bottom: 20px;
-  color: #666666;
+.service-row p {
+  color: #555;
   line-height: 1.8;
-}
-
-.expanded-content ul {
-  padding-left: 25px;
   margin-bottom: 25px;
 }
 
-.expanded-content ul li {
-  margin-bottom: 12px;
+/* Advanced Animated List Items */
+.service-row ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+  margin-bottom: 10px;
   position: relative;
-  padding-left: 10px;
-  color: #666666;
 }
 
-/* Intro Section */
-.service-intro-content {
-  background: #ffffff;
-  border-radius: 15px;
-  border: 1px solid rgba(106, 17, 203, 0.1);
-  padding: 40px;
-  margin-bottom: 40px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
-  color: #333333;
+.service-row ul li {
   position: relative;
-  overflow: hidden;
+  padding: 12px 15px 12px 40px;
+  margin-bottom: 8px;
+  line-height: 1.6;
+  color: #555;
+  transition: all 0.4s ease;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateX(0);
+  z-index: 1;
 }
 
-.service-intro-content::before {
-  content: '';
+.service-row ul li::before {
+  content: '✓';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 5px;
-  height: 100%;
-  background: linear-gradient(to bottom, #6a11cb, #2575fc);
-  border-radius: 15px 0 0 15px;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-weight: bold;
+  background: rgba(63, 110, 181, 0.7);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
-.intro-heading {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #333333;
-  margin-bottom: 30px;
-  text-align: center;
-  position: relative;
-  padding-bottom: 15px;
+.service-row ul li:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: translateX(5px);
+  color: #333;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.intro-heading::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 3px;
-  background: linear-gradient(to right, #6a11cb, #2575fc);
-  border-radius: 3px;
-}
-
-.intro-section {
-  margin-bottom: 30px;
-}
-
-.intro-subheading {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #333333;
-  margin-bottom: 20px;
-  border-left: 3px solid #6a11cb;
-  padding-left: 15px;
-}
-
-.service-intro-content p {
-  color: #666666;
-  line-height: 1.8;
-  margin-bottom: 15px;
-  font-size: 1.05rem;
+.service-row ul li:hover::before {
+  background: rgba(63, 110, 181, 0.9);
+  transform: translateY(-50%) scale(1.1);
 }
 
 /* Animations */
@@ -1292,4 +1279,1479 @@
 
 .bottom10 {
   margin-bottom: 10px;
+}
+
+/* Add styling for the component section */
+.component-section {
+  padding: 20px 0;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Remove this rule that created the blue line */
+.component-section::before {
+  display: none; /* This hides the blue line */
+}
+
+/* Add styling for the services banner */
+.services-banner {
+  margin: 30px auto 50px;
+  max-width: 90%;
+  text-align: center;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.services-banner-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Remove any hover effects from the banner image */
+.services-banner:hover .services-banner-img {
+  transform: none;
+  filter: none;
+  box-shadow: none;
+}
+
+/* Remove any background styling that might be affecting the image */
+.services-banner::before,
+.services-banner::after {
+  display: none;
+}
+
+/* Update component-content to not rely on left border */
+.component-content {
+  padding: 15px 25px;
+  margin-bottom: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+}
+
+.component-subtitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.component-subtitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #00c2cb, #2575fc);
+  border-radius: 3px;
+}
+
+.component-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 20px;
+  position: relative;
+  text-align: center;
+}
+
+.component-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, #00c2cb, #2575fc);
+  border-radius: 2px;
+}
+
+/* Click instruction styling */
+.click-instruction {
+  text-align: center;
+  margin: 0 auto 30px;
+  font-size: 1.1rem;
+  color: #555;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  animation: pulse 2s infinite alternate;
+}
+
+.pointer-icon {
+  color: #00c2cb;
+  margin-right: 10px;
+  animation: pointBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes pointBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Click here indicator on cards */
+.click-here-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.service-card:hover .click-here-indicator {
+  opacity: 1;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Add gradient backgrounds to service cards based on their type */
+.service-card.gradient-blue .click-here-indicator {
+  background: rgba(0, 194, 203, 0.8);
+}
+
+.service-card.gradient-green .click-here-indicator {
+  background: rgba(39, 174, 96, 0.8);
+}
+
+.service-card.gradient-purple .click-here-indicator {
+  background: rgba(155, 89, 182, 0.8);
+}
+
+.service-card.gradient-orange .click-here-indicator {
+  background: rgba(230, 126, 34, 0.8);
+}
+
+/* Service icon background colors to match expanded content */
+.service-card.gradient-blue .service-icon {
+  border-color: rgba(0, 194, 203, 0.3);
+  background: rgba(0, 194, 203, 0.1);
+}
+
+.service-card.gradient-blue .service-icon svg {
+  color: #00c2cb;
+}
+
+.service-card.gradient-green .service-icon {
+  border-color: rgba(39, 174, 96, 0.3);
+  background: rgba(39, 174, 96, 0.1);
+}
+
+.service-card.gradient-green .service-icon svg {
+  color: #27ae60;
+}
+
+.service-card.gradient-purple .service-icon {
+  border-color: rgba(155, 89, 182, 0.3);
+  background: rgba(155, 89, 182, 0.1);
+}
+
+.service-card.gradient-purple .service-icon svg {
+  color: #9b59b6;
+}
+
+.service-card.gradient-orange .service-icon {
+  border-color: rgba(230, 126, 34, 0.3);
+  background: rgba(230, 126, 34, 0.1);
+}
+
+.service-card.gradient-orange .service-icon svg {
+  color: #e67e22;
+}
+
+/* Add gradient borders to the bottom of cards */
+.service-card.gradient-blue {
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #00c2cb, #2575fc);
+  border-image-slice: 1;
+}
+
+.service-card.gradient-green {
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #27ae60, #2ecc71);
+  border-image-slice: 1;
+}
+
+.service-card.gradient-purple {
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #9b59b6, #8e44ad);
+  border-image-slice: 1;
+}
+
+.service-card.gradient-orange {
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #e67e22, #f39c12);
+  border-image-slice: 1;
+}
+
+/* Customize show-more button for each type */
+.service-card.gradient-blue .show-more-btn {
+  background: rgba(0, 194, 203, 0.1);
+  border: 1px solid rgba(0, 194, 203, 0.3);
+  color: #00c2cb;
+}
+
+.service-card.gradient-green .show-more-btn {
+  background: rgba(39, 174, 96, 0.1);
+  border: 1px solid rgba(39, 174, 96, 0.3);
+  color: #27ae60;
+}
+
+.service-card.gradient-purple .show-more-btn {
+  background: rgba(155, 89, 182, 0.1);
+  border: 1px solid rgba(155, 89, 182, 0.3);
+  color: #9b59b6;
+}
+
+.service-card.gradient-orange .show-more-btn {
+  background: rgba(230, 126, 34, 0.1);
+  border: 1px solid rgba(230, 126, 34, 0.3);
+  color: #e67e22;
+}
+
+/* Hover effects for the show-more button */
+.service-card.gradient-blue .show-more-btn:hover {
+  background: rgba(0, 194, 203, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 194, 203, 0.2);
+}
+
+.service-card.gradient-green .show-more-btn:hover {
+  background: rgba(39, 174, 96, 0.2);
+  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.2);
+}
+
+.service-card.gradient-purple .show-more-btn:hover {
+  background: rgba(155, 89, 182, 0.2);
+  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.2);
+}
+
+.service-card.gradient-orange .show-more-btn:hover {
+  background: rgba(230, 126, 34, 0.2);
+  box-shadow: 0 5px 15px rgba(230, 126, 34, 0.2);
+}
+
+/* Style the click-here-indicator to match service colors */
+.click-here-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.service-card:hover .click-here-indicator {
+  opacity: 1;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Show more button */
+.show-more-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  background: rgba(0, 194, 203, 0.1);
+  border: 1px solid rgba(0, 194, 203, 0.3);
+  border-radius: 50px;
+  color: #00c2cb;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.show-more-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.show-more-btn:hover {
+  background: rgba(0, 194, 203, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 194, 203, 0.2);
+}
+
+.info-icon {
+  font-size: 14px;
+  animation: rotateIcon 3s infinite linear;
+}
+
+@keyframes rotateIcon {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(0deg); }
+  30% { transform: rotate(15deg); }
+  35% { transform: rotate(-15deg); }
+  40% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Service card container and expanded details */
+.service-card-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.service-details-expanded {
+  grid-column: 1 / -1;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  color: #333333;
+  line-height: 1.8;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  border: none;
+}
+
+.service-details-expanded::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, #00c2cb, #2575fc);
+  z-index: 1;
+}
+
+/* Service detail headers with gradient background */
+.expanded-content {
+  position: relative;
+  z-index: 2;
+  padding: 30px;
+}
+
+/* Main heading styling */
+.expanded-content h5 {
+  color: #333333;
+  margin: 20px 0 25px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 15px 25px;
+  border-radius: 10px;
+  position: relative;
+  background: linear-gradient(135deg, rgba(0, 194, 203, 0.08), rgba(37, 117, 252, 0.05));
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  animation: fadeInLeft 0.5s ease-out 0.2s both;
+}
+
+.expanded-content h5::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6px;
+  background: linear-gradient(to bottom, #6a11cb, #2575fc);
+  border-radius: 3px 0 0 3px;
+}
+
+.expanded-content h5 strong {
+  background: linear-gradient(135deg, #00c2cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.expanded-content p {
+  margin-bottom: 25px;
+  color: #555;
+  line-height: 1.8;
+  padding: 0 5px;
+  animation: fadeInUp 0.5s ease-out 0.3s both;
+}
+
+/* Two-column layout for lists */
+.expanded-content ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 0;
+  margin-bottom: 30px;
+  list-style: none;
+  animation: fadeInUp 0.5s ease-out 0.4s both;
+}
+
+.expanded-content ul li {
+  position: relative;
+  padding: 12px 15px 12px 35px;
+  margin-bottom: 10px;
+  color: #555;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  animation: fadeInLeft 0.5s ease-out;
+  animation-fill-mode: both;
+  border-left: 3px solid transparent;
+}
+
+/* Gradient backgrounds for different service types */
+.service-details-expanded[data-service="0"] li {
+  border-left-color: #00c2cb;
+}
+
+.service-details-expanded[data-service="1"] li {
+  border-left-color: #27ae60;
+}
+
+.service-details-expanded[data-service="2"] li {
+  border-left-color: #9b59b6;
+}
+
+.service-details-expanded[data-service="3"] li {
+  border-left-color: #e67e22;
+}
+
+.service-details-expanded[data-service="4"] li {
+  border-left-color: #3498db;
+}
+
+.service-details-expanded[data-service="5"] li {
+  border-left-color: #2ecc71;
+}
+
+.service-details-expanded[data-service="6"] li {
+  border-left-color: #e74c3c;
+}
+
+.service-details-expanded[data-service="7"] li {
+  border-left-color: #8e44ad;
+}
+
+.service-details-expanded[data-service="8"] li {
+  border-left-color: #00c2cb;
+}
+
+.service-details-expanded[data-service="9"] li {
+  border-left-color: #16a085;
+}
+
+.service-details-expanded[data-service="10"] li {
+  border-left-color: #d35400;
+}
+
+.service-details-expanded[data-service="11"] li {
+  border-left-color: #2980b9;
+}
+
+.expanded-content ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  background: linear-gradient(135deg, #00c2cb, #2575fc);
+}
+
+.service-details-expanded[data-service="0"] li::before {
+  background: linear-gradient(135deg, #00c2cb, #2575fc);
+}
+
+.service-details-expanded[data-service="1"] li::before {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.service-details-expanded[data-service="2"] li::before {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+.service-details-expanded[data-service="3"] li::before {
+  background: linear-gradient(135deg, #e67e22, #f39c12);
+}
+
+.service-details-expanded[data-service="4"] li::before {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.service-details-expanded[data-service="5"] li::before {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.service-details-expanded[data-service="6"] li::before {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.service-details-expanded[data-service="7"] li::before {
+  background: linear-gradient(135deg, #8e44ad, #9b59b6);
+}
+
+.service-details-expanded[data-service="8"] li::before {
+  background: linear-gradient(135deg, #00c2cb, #2575fc);
+}
+
+.service-details-expanded[data-service="9"] li::before {
+  background: linear-gradient(135deg, #16a085, #1abc9c);
+}
+
+.service-details-expanded[data-service="10"] li::before {
+  background: linear-gradient(135deg, #d35400, #e67e22);
+}
+
+.service-details-expanded[data-service="11"] li::before {
+  background: linear-gradient(135deg, #2980b9, #3498db);
+}
+
+.expanded-content ul li:hover {
+  transform: translateX(5px);
+  background: white;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Nested lists with indentation */
+.expanded-content ul ul {
+  display: block;
+  margin: 10px 0 5px;
+  padding-left: 15px;
+}
+
+.expanded-content ul ul li {
+  box-shadow: none;
+  margin-bottom: 5px;
+  padding: 8px 15px 8px 30px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Title for the expanded service */
+.service-expanded-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.service-expanded-title .service-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  background: linear-gradient(135deg, #00c2cb, #2575fc);
+  color: white;
+  font-size: 20px;
+  box-shadow: 0 5px 15px rgba(0, 194, 203, 0.2);
+}
+
+.service-expanded-title h4 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.close-expanded {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: none;
+  z-index: 5;
+}
+
+.close-expanded:hover {
+  background: #f8f8f8;
+  transform: rotate(90deg);
+  color: #e74c3c;
+}
+
+/* Custom styling for specific services */
+.service-details-expanded[data-service="0"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="0"]::before {
+  background: linear-gradient(135deg, #00c2cb, #2575fc);
+}
+
+.service-details-expanded[data-service="1"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="1"]::before {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.service-details-expanded[data-service="2"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="2"]::before {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+.service-details-expanded[data-service="3"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="3"]::before {
+  background: linear-gradient(135deg, #e67e22, #f39c12);
+}
+
+.service-details-expanded[data-service="4"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="4"]::before {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.service-details-expanded[data-service="5"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="5"]::before {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.service-details-expanded[data-service="6"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="6"]::before {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.service-details-expanded[data-service="7"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="7"]::before {
+  background: linear-gradient(135deg, #8e44ad, #9b59b6);
+}
+
+.service-details-expanded[data-service="8"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="8"]::before {
+  background: linear-gradient(135deg, #00c2cb, #2575fc);
+}
+
+.service-details-expanded[data-service="9"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="9"]::before {
+  background: linear-gradient(135deg, #16a085, #1abc9c);
+}
+
+.service-details-expanded[data-service="10"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="10"]::before {
+  background: linear-gradient(135deg, #d35400, #e67e22);
+}
+
+.service-details-expanded[data-service="11"] .service-expanded-title .service-icon,
+.service-details-expanded[data-service="11"]::before {
+  background: linear-gradient(135deg, #2980b9, #3498db);
+}
+
+/* Two-column aspect styling */
+.aspects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.aspect-section {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.aspect-section h5 {
+  margin-top: 0;
+}
+
+.technical-aspects {
+  border-left: 4px solid #6a11cb;
+}
+
+.commercial-aspects {
+  border-left: 4px solid #00c2cb;
+}
+
+/* Add gradient backgrounds to service cards based on their type */
+.service-card.gradient-blue .click-here-indicator {
+  background: rgba(0, 194, 203, 0.8);
+}
+
+.service-card.gradient-green .click-here-indicator {
+  background: rgba(39, 174, 96, 0.8);
+}
+
+.service-card.gradient-purple .click-here-indicator {
+  background: rgba(155, 89, 182, 0.8);
+}
+
+.service-card.gradient-orange .click-here-indicator {
+  background: rgba(230, 126, 34, 0.8);
+}
+
+/* Service icon background colors to match expanded content */
+.service-card.gradient-blue .service-icon {
+  border-color: rgba(0, 194, 203, 0.3);
+  background: rgba(0, 194, 203, 0.1);
+}
+
+.service-card.gradient-blue .service-icon svg {
+  color: #00c2cb;
+}
+
+.service-card.gradient-green .service-icon {
+  border-color: rgba(39, 174, 96, 0.3);
+  background: rgba(39, 174, 96, 0.1);
+}
+
+.service-card.gradient-green .service-icon svg {
+  color: #27ae60;
+}
+
+.service-card.gradient-purple .service-icon {
+  border-color: rgba(155, 89, 182, 0.3);
+  background: rgba(155, 89, 182, 0.1);
+}
+
+.service-card.gradient-purple .service-icon svg {
+  color: #9b59b6;
+}
+
+.service-card.gradient-orange .service-icon {
+  border-color: rgba(230, 126, 34, 0.3);
+  background: rgba(230, 126, 34, 0.1);
+}
+
+.service-card.gradient-orange .service-icon svg {
+  color: #e67e22;
+}
+
+/* Add gradient borders to the bottom of cards */
+.service-card.gradient-blue {
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #00c2cb, #2575fc);
+  border-image-slice: 1;
+}
+
+.service-card.gradient-green {
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #27ae60, #2ecc71);
+  border-image-slice: 1;
+}
+
+.service-card.gradient-purple {
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #9b59b6, #8e44ad);
+  border-image-slice: 1;
+}
+
+.service-card.gradient-orange {
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #e67e22, #f39c12);
+  border-image-slice: 1;
+}
+
+/* Customize show-more button for each type */
+.service-card.gradient-blue .show-more-btn {
+  background: rgba(0, 194, 203, 0.1);
+  border: 1px solid rgba(0, 194, 203, 0.3);
+  color: #00c2cb;
+}
+
+.service-card.gradient-green .show-more-btn {
+  background: rgba(39, 174, 96, 0.1);
+  border: 1px solid rgba(39, 174, 96, 0.3);
+  color: #27ae60;
+}
+
+.service-card.gradient-purple .show-more-btn {
+  background: rgba(155, 89, 182, 0.1);
+  border: 1px solid rgba(155, 89, 182, 0.3);
+  color: #9b59b6;
+}
+
+.service-card.gradient-orange .show-more-btn {
+  background: rgba(230, 126, 34, 0.1);
+  border: 1px solid rgba(230, 126, 34, 0.3);
+  color: #e67e22;
+}
+
+/* Hover effects for the show-more button */
+.service-card.gradient-blue .show-more-btn:hover {
+  background: rgba(0, 194, 203, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 194, 203, 0.2);
+}
+
+.service-card.gradient-green .show-more-btn:hover {
+  background: rgba(39, 174, 96, 0.2);
+  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.2);
+}
+
+.service-card.gradient-purple .show-more-btn:hover {
+  background: rgba(155, 89, 182, 0.2);
+  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.2);
+}
+
+.service-card.gradient-orange .show-more-btn:hover {
+  background: rgba(230, 126, 34, 0.2);
+  box-shadow: 0 5px 15px rgba(230, 126, 34, 0.2);
+}
+
+/* Style the click-here-indicator to match service colors */
+.click-here-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  animation: pulsate 2s infinite alternate;
+}
+
+@keyframes pulsate {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
+.service-card:hover .click-here-indicator {
+  opacity: 1;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Enhanced Expanded Details Animation */
+.service-details-expanded {
+  grid-column: 1 / -1;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  color: #333333;
+  line-height: 1.8;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  border: none;
+}
+
+.service-details-expanded::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, #00c2cb, #2575fc);
+  z-index: 1;
+}
+
+.service-details-expanded.animate-in {
+  animation: slideInExpand 0.5s forwards ease-out;
+}
+
+.service-details-expanded.animate-out {
+  animation: slideOutCollapse 0.3s forwards ease-in;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@keyframes slideInExpand {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideOutCollapse {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+}
+
+.service-card.gradient-blue {
+  border-bottom: 4px solid #4285f4;
+  background: linear-gradient(180deg, #ffffff 0%, #e8f0fe 100%);
+}
+
+.service-card.gradient-green {
+  border-bottom: 4px solid #34a853;
+  background: linear-gradient(180deg, #ffffff 0%, #e6f4ea 100%);
+}
+
+.service-card.gradient-purple {
+  border-bottom: 4px solid #a142f4;
+  background: linear-gradient(180deg, #ffffff 0%, #f3e8fd 100%);
+}
+
+.service-card.gradient-orange {
+  border-bottom: 4px solid #fbbc05;
+  background: linear-gradient(180deg, #ffffff 0%, #fef6e0 100%);
+}
+
+/* Add unique colors for additional cards */
+.service-card:nth-child(5) {
+  border-bottom: 4px solid #ea4335;
+  background: linear-gradient(180deg, #ffffff 0%, #fce8e6 100%);
+}
+
+.service-card:nth-child(6) {
+  border-bottom: 4px solid #00c9a7;
+  background: linear-gradient(180deg, #ffffff 0%, #e6f9f6 100%);
+}
+
+.service-card:nth-child(7) {
+  border-bottom: 4px solid #9c27b0;
+  background: linear-gradient(180deg, #ffffff 0%, #f3e5f5 100%);
+}
+
+.service-card:nth-child(8) {
+  border-bottom: 4px solid #3d5afe;
+  background: linear-gradient(180deg, #ffffff 0%, #e8eafe 100%);
+}
+
+.service-card:nth-child(9) {
+  border-bottom: 4px solid #ff6d00;
+  background: linear-gradient(180deg, #ffffff 0%, #fff0e6 100%);
+}
+
+.service-card:nth-child(10) {
+  border-bottom: 4px solid #2196f3;
+  background: linear-gradient(180deg, #ffffff 0%, #e3f2fd 100%);
+}
+
+.service-card:nth-child(11) {
+  border-bottom: 4px solid #ff4081;
+  background: linear-gradient(180deg, #ffffff 0%, #fce4ec 100%);
+}
+
+.service-card:nth-child(12) {
+  border-bottom: 4px solid #43a047;
+  background: linear-gradient(180deg, #ffffff 0%, #e8f5e9 100%);
+}
+
+/* Base gradient classes - keep these */
+.service-card.gradient-blue {
+  border-bottom: 4px solid #4285f4;
+  background: linear-gradient(180deg, #ffffff 0%, #e8f0fe 100%);
+}
+
+.service-card.gradient-green {
+  border-bottom: 4px solid #34a853;
+  background: linear-gradient(180deg, #ffffff 0%, #e6f4ea 100%);
+}
+
+.service-card.gradient-purple {
+  border-bottom: 4px solid #a142f4;
+  background: linear-gradient(180deg, #ffffff 0%, #f3e8fd 100%);
+}
+
+.service-card.gradient-orange {
+  border-bottom: 4px solid #fbbc05;
+  background: linear-gradient(180deg, #ffffff 0%, #fef6e0 100%);
+}
+
+/* Add these new classes for unique colors */
+.service-card.gradient-red {
+  border-bottom: 4px solid #ea4335;
+  background: linear-gradient(180deg, #ffffff 0%, #fce8e6 100%);
+}
+
+.service-card.gradient-teal {
+  border-bottom: 4px solid #00c9a7;
+  background: linear-gradient(180deg, #ffffff 0%, #e6f9f6 100%);
+}
+
+.service-card.gradient-pink {
+  border-bottom: 4px solid #e91e63;
+  background: linear-gradient(180deg, #ffffff 0%, #fce4ec 100%);
+}
+
+.service-card.gradient-indigo {
+  border-bottom: 4px solid #3d5afe;
+  background: linear-gradient(180deg, #ffffff 0%, #e8eafe 100%);
+}
+
+.service-card.gradient-amber {
+  border-bottom: 4px solid #ff6d00;
+  background: linear-gradient(180deg, #ffffff 0%, #fff0e6 100%);
+}
+
+.service-card.gradient-cyan {
+  border-bottom: 4px solid #00bcd4;
+  background: linear-gradient(180deg, #ffffff 0%, #e0f7fa 100%);
+}
+
+.service-card.gradient-deepPurple {
+  border-bottom: 4px solid #673ab7;
+  background: linear-gradient(180deg, #ffffff 0%, #ede7f6 100%);
+}
+
+.service-card.gradient-lime {
+  border-bottom: 4px solid #cddc39;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fbe7 100%);
 } 
+
+/* Style the service-details-expanded based on the data-service attribute */
+
+/* For gradient-blue cards */
+.service-details-expanded[data-service="0"]::before {
+  background: linear-gradient(to right, #4285f4, #4285f4);
+}
+
+.service-details-expanded[data-service="0"] .service-expanded-title {
+  background-color: rgba(66, 133, 244, 0.05);
+}
+
+.service-details-expanded[data-service="0"] li::before {
+  background: #4285f4;
+}
+
+/* For gradient-green cards */
+.service-details-expanded[data-service="1"]::before {
+  background: linear-gradient(to right, #34a853, #34a853);
+}
+
+.service-details-expanded[data-service="1"] .service-expanded-title {
+  background-color: rgba(52, 168, 83, 0.05);
+}
+
+.service-details-expanded[data-service="1"] li::before {
+  background: #34a853;
+}
+
+/* For gradient-purple cards */
+.service-details-expanded[data-service="2"]::before {
+  background: linear-gradient(to right, #a142f4, #a142f4);
+}
+
+.service-details-expanded[data-service="2"] .service-expanded-title {
+  background-color: rgba(161, 66, 244, 0.05);
+}
+
+.service-details-expanded[data-service="2"] li::before {
+  background: #a142f4;
+}
+
+/* For gradient-orange cards */
+.service-details-expanded[data-service="3"]::before {
+  background: linear-gradient(to right, #fbbc05, #fbbc05);
+}
+
+.service-details-expanded[data-service="3"] .service-expanded-title {
+  background-color: rgba(251, 188, 5, 0.05);
+}
+
+.service-details-expanded[data-service="3"] li::before {
+  background: #fbbc05;
+}
+
+/* For gradient-red cards */
+.service-details-expanded[data-service="4"]::before {
+  background: linear-gradient(to right, #ea4335, #ea4335);
+}
+
+.service-details-expanded[data-service="4"] .service-expanded-title {
+  background-color: rgba(234, 67, 53, 0.05);
+}
+
+.service-details-expanded[data-service="4"] li::before {
+  background: #ea4335;
+}
+
+/* For gradient-teal cards */
+.service-details-expanded[data-service="5"]::before {
+  background: linear-gradient(to right, #00c9a7, #00c9a7);
+}
+
+.service-details-expanded[data-service="5"] .service-expanded-title {
+  background-color: rgba(0, 201, 167, 0.05);
+}
+
+.service-details-expanded[data-service="5"] li::before {
+  background: #00c9a7;
+}
+
+/* For gradient-pink cards */
+.service-details-expanded[data-service="6"]::before {
+  background: linear-gradient(to right, #e91e63, #e91e63);
+}
+
+.service-details-expanded[data-service="6"] .service-expanded-title {
+  background-color: rgba(233, 30, 99, 0.05);
+}
+
+.service-details-expanded[data-service="6"] li::before {
+  background: #e91e63;
+}
+
+/* For gradient-indigo cards */
+.service-details-expanded[data-service="7"]::before {
+  background: linear-gradient(to right, #3d5afe, #3d5afe);
+}
+
+.service-details-expanded[data-service="7"] .service-expanded-title {
+  background-color: rgba(61, 90, 254, 0.05);
+}
+
+.service-details-expanded[data-service="7"] li::before {
+  background: #3d5afe;
+}
+
+/* For gradient-amber cards */
+.service-details-expanded[data-service="8"]::before {
+  background: linear-gradient(to right, #ff6d00, #ff6d00);
+}
+
+.service-details-expanded[data-service="8"] .service-expanded-title {
+  background-color: rgba(255, 109, 0, 0.05);
+}
+
+.service-details-expanded[data-service="8"] li::before {
+  background: #ff6d00;
+}
+
+/* For gradient-cyan cards */
+.service-details-expanded[data-service="9"]::before {
+  background: linear-gradient(to right, #00bcd4, #00bcd4);
+}
+
+.service-details-expanded[data-service="9"] .service-expanded-title {
+  background-color: rgba(0, 188, 212, 0.05);
+}
+
+.service-details-expanded[data-service="9"] li::before {
+  background: #00bcd4;
+}
+
+/* For gradient-deepPurple cards */
+.service-details-expanded[data-service="10"]::before {
+  background: linear-gradient(to right, #673ab7, #673ab7);
+}
+
+.service-details-expanded[data-service="10"] .service-expanded-title {
+  background-color: rgba(103, 58, 183, 0.05);
+}
+
+.service-details-expanded[data-service="10"] li::before {
+  background: #673ab7;
+}
+
+/* For gradient-lime cards */
+.service-details-expanded[data-service="11"]::before {
+  background: linear-gradient(to right, #cddc39, #cddc39);
+}
+
+.service-details-expanded[data-service="11"] .service-expanded-title {
+  background-color: rgba(205, 220, 57, 0.05);
+}
+
+.service-details-expanded[data-service="11"] li::before {
+  background: #cddc39;
+}
+
+/* Style the expanded content cards */
+.expanded-content ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 12px;
+  list-style-type: none;
+}
+
+/* Remove the tick marks (bullet points) */
+.expanded-content ul li::before {
+  display: none;
+}
+
+/* Add left border styling to content sections */
+.service-details-expanded[data-service="0"] .expanded-content ul li {
+  border-left: 3px solid #4285f4;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="1"] .expanded-content ul li {
+  border-left: 3px solid #34a853;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="2"] .expanded-content ul li {
+  border-left: 3px solid #a142f4;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="3"] .expanded-content ul li {
+  border-left: 3px solid #fbbc05;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="4"] .expanded-content ul li {
+  border-left: 3px solid #ea4335;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="5"] .expanded-content ul li {
+  border-left: 3px solid #00c9a7;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="6"] .expanded-content ul li {
+  border-left: 3px solid #e91e63;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="7"] .expanded-content ul li {
+  border-left: 3px solid #3d5afe;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="8"] .expanded-content ul li {
+  border-left: 3px solid #ff6d00;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="9"] .expanded-content ul li {
+  border-left: 3px solid #00bcd4;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="10"] .expanded-content ul li {
+  border-left: 3px solid #673ab7;
+  padding-left: 15px;
+}
+
+.service-details-expanded[data-service="11"] .expanded-content ul li {
+  border-left: 3px solid #cddc39;
+  padding-left: 15px;
+}
+
+/* Also style the top bar of expanded content to match card color */
+.service-details-expanded[data-service="0"]::before {
+  background: #4285f4;
+}
+
+.service-details-expanded[data-service="1"]::before {
+  background: #34a853;
+}
+
+.service-details-expanded[data-service="2"]::before {
+  background: #a142f4;
+}
+
+.service-details-expanded[data-service="3"]::before {
+  background: #fbbc05;
+}
+
+.service-details-expanded[data-service="4"]::before {
+  background: #ea4335;
+}
+
+.service-details-expanded[data-service="5"]::before {
+  background: #00c9a7;
+}
+
+.service-details-expanded[data-service="6"]::before {
+  background: #e91e63;
+}
+
+.service-details-expanded[data-service="7"]::before {
+  background: #3d5afe;
+}
+
+.service-details-expanded[data-service="8"]::before {
+  background: #ff6d00;
+}
+
+.service-details-expanded[data-service="9"]::before {
+  background: #00bcd4;
+}
+
+.service-details-expanded[data-service="10"]::before {
+  background: #673ab7;
+}
+
+.service-details-expanded[data-service="11"]::before {
+  background: #cddc39;
+}
+
+/* Make sure "Hover here" is visible for all cards */
+.service-card .click-here-indicator {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Add matching colors for "Hover here" indicators for each card */
+.service-card.gradient-blue .click-here-indicator {
+  background-color: #4285f4;
+}
+
+.service-card.gradient-green .click-here-indicator {
+  background-color: #34a853;
+}
+
+.service-card.gradient-purple .click-here-indicator {
+  background-color: #a142f4;
+}
+
+.service-card.gradient-orange .click-here-indicator {
+  background-color: #fbbc05;
+}
+
+.service-card.gradient-red .click-here-indicator {
+  background-color: #ea4335;
+}
+
+.service-card.gradient-teal .click-here-indicator {
+  background-color: #00c9a7;
+}
+
+.service-card.gradient-pink .click-here-indicator {
+  background-color: #e91e63;
+}
+
+.service-card.gradient-indigo .click-here-indicator {
+  background-color: #3d5afe;
+}
+
+.service-card.gradient-amber .click-here-indicator {
+  background-color: #ff6d00;
+}
+
+.service-card.gradient-cyan .click-here-indicator {
+  background-color: #00bcd4;
+}
+
+.service-card.gradient-deepPurple .click-here-indicator {
+  background-color: #673ab7;
+}
+
+.service-card.gradient-lime .click-here-indicator {
+  background-color: #cddc39;
+  color: #333; /* Dark text for better contrast on light background */
+}
+
+/* Remove colored background from service icons */
+.service-icon {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Adjust icon styling to ensure visibility */
+.service-card .service-icon svg {
+  color: inherit;
+  opacity: 0.9;
+}
+
+/* Make icons more colorful and match card theme */
+.service-card.gradient-blue .service-icon svg {
+  color: #4285f4;
+}
+
+.service-card.gradient-green .service-icon svg {
+  color: #34a853;
+}
+
+.service-card.gradient-purple .service-icon svg {
+  color: #a142f4;
+}
+
+.service-card.gradient-orange .service-icon svg {
+  color: #fbbc05;
+}
+
+.service-card.gradient-red .service-icon svg {
+  color: #ea4335;
+}
+
+.service-card.gradient-teal .service-icon svg {
+  color: #00c9a7;
+}
+
+.service-card.gradient-pink .service-icon svg {
+  color: #e91e63;
+}
+
+.service-card.gradient-indigo .service-icon svg {
+  color: #3d5afe;
+}
+
+.service-card.gradient-amber .service-icon svg {
+  color: #ff6d00;
+}
+
+.service-card.gradient-cyan .service-icon svg {
+  color: #00bcd4;
+}
+
+.service-card.gradient-deepPurple .service-icon svg {
+  color: #673ab7;
+}
+
+.service-card.gradient-lime .service-icon svg {
+  color: #cddc39;
+}

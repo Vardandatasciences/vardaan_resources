@@ -1,17 +1,22 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
+import logo from '../assets/images/vr logo.png';
 
 const Navbar = () => {
   const location = useLocation();
   const activePage = location.pathname.split('/').pop() || 'index';
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <header className="navbar-wrapper">
       <nav className="navbar navbar-expand-lg">
         <div className="container">
-          <Link className="navbar-brand" to="/">
-            <img src="../assets/images/logo.png" className="logo" alt="LOGO" />
+          <Link className="navbar-brand" to="/" onClick={scrollToTop}>
+            <img src={logo} className="logo" alt="LOGO" />
           </Link>
           
           <button 
@@ -32,14 +37,16 @@ const Navbar = () => {
                 <Link 
                   to="/" 
                   className={`nav-link ${activePage === '' || activePage === 'index' ? 'active' : ''}`}
+                  onClick={scrollToTop}
                 >
-                  About Us
+              Home
                 </Link>
               </li>
               <li className="nav-item">
                 <Link 
                   to="/mission" 
                   className={`nav-link ${activePage === 'mission' ? 'active' : ''}`}
+                  onClick={scrollToTop}
                 >
                   Our Mission
                 </Link>
@@ -48,6 +55,7 @@ const Navbar = () => {
                 <Link 
                   to="/services" 
                   className={`nav-link ${activePage === 'services' ? 'active' : ''}`}
+                  onClick={scrollToTop}
                 >
                   Our Services
                 </Link>
@@ -56,6 +64,7 @@ const Navbar = () => {
                 <Link 
                   to="/management" 
                   className={`nav-link ${activePage === 'management' ? 'active' : ''}`}
+                  onClick={scrollToTop}
                 >
                   Management
                 </Link>
@@ -64,6 +73,7 @@ const Navbar = () => {
                 <Link 
                   to="/credentials" 
                   className={`nav-link ${activePage === 'credentials' ? 'active' : ''}`}
+                  onClick={scrollToTop}
                 >
                   Credentials
                 </Link>
@@ -72,6 +82,7 @@ const Navbar = () => {
                 <Link 
                   to="/contact" 
                   className={`nav-link ${activePage === 'contact' ? 'active' : ''}`}
+                  onClick={scrollToTop}
                 >
                   Contact Us
                 </Link>

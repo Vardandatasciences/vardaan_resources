@@ -8,17 +8,54 @@
   z-index: 1000;
 }
 
+/* The contact-bar and contact-info styles kept as comments for reference
+.contact-bar {
+  background-color: #0089ba;
+  color: white;
+  padding: 8px 0;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.contact-item {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.contact-item:hover {
+  opacity: 0.85;
+  color: white;
+}
+
+.contact-item i {
+  font-size: 16px;
+}
+*/
+
 .navbar {
   padding: 0.75rem 0;
 }
 
 .navbar-brand {
   padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 .logo {
   height: 40px;
-  width: auto;
+  width: 180px;
+  object-fit: contain;
+  max-height: 100%;
 }
 
 .navbar-nav {
@@ -92,4 +129,10 @@
   .dropdown-item {
     padding: 0.5rem 1rem;
   }
+  
+  /* Removed contact-info styles for mobile */
+}
+
+@media (max-width: 576px) {
+  /* Removed contact-info styles for small screens */
 } 

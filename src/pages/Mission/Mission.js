@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Mission.css';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import Footer from '../../components/Footer'; 
+import NextPageCTA from '../../components/NextPageCTA';
 
 const Mission = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -61,14 +62,6 @@ const Mission = () => {
     },
     {
       id: 2,
-      title: "Development",
-      content: "Develop cost effective solutions that meet specific needs of our clients consistent with long term development of the industry.",
-      icon: "fa-solid fa-code",
-      color: "#8B5CF6",
-      lightColor: "#F3E8FF"
-    },
-    {
-      id: 3,
       title: "Excellence",
       content: "Provide our customers with the complete range and highest quality of information and services.",
       icon: "fa-solid fa-chart-line",
@@ -76,7 +69,15 @@ const Mission = () => {
       lightColor: "#FCE7F3"
     },
     {
-      id: 5,
+      id: 3,
+      title: "Relationships",
+      content: "Building customer relationships by focusing on customer needs and striving to exceed their expectations through flexible customer driven solutions.",
+      icon: "fa-solid fa-users",
+      color: "#F97316",
+      lightColor: "#FFF7ED"
+    },
+    {
+      id: 4,
       title: "Integrity",
       content: "Maintain high standards of professional conduct and to comply with all the rules and regulations relating to our work.",
       icon: "fa-solid fa-shield-halved",
@@ -84,12 +85,40 @@ const Mission = () => {
       lightColor: "#ECFDF5"
     },
     {
-      id: 4,
-      title: "Relationships",
-      content: "Building customer relationships by focusing on customer needs and striving to exceed their expectations through flexible customer driven solutions.",
+      id: 5,
+      title: "Development",
+      content: "Develop cost effective solutions that meet specific needs of our clients consistent with long term development of the industry.",
+      icon: "fa-solid fa-code",
+      color: "#8B5CF6",
+      lightColor: "#F3E8FF"
+    }
+  ];
+
+  // Mission principles array
+  const missionPrinciples = [
+    {
+      id: 1,
+      text: "Quality assurance at every step",
+      icon: "fa-solid fa-check-double",
+      iconClass: "mission-icon-1"
+    },
+    {
+      id: 2,
+      text: "Client-centered approach",
       icon: "fa-solid fa-users",
-      color: "#F97316",
-      lightColor: "#FFF7ED"
+      iconClass: "mission-icon-2"
+    },
+    {
+      id: 3,
+      text: "Innovation in engineering solutions",
+      icon: "fa-solid fa-lightbulb",
+      iconClass: "mission-icon-3"
+    },
+    {
+      id: 4,
+      text: "Sustainable development practices",
+      icon: "fa-solid fa-leaf",
+      iconClass: "mission-icon-4"
     }
   ];
 
@@ -124,7 +153,7 @@ const Mission = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Our Mission
+            Our Mission & Vision
           </motion.h1>
           <motion.div 
             className="hero-decoration"
@@ -146,120 +175,110 @@ const Mission = () => {
         </motion.div>
       </motion.section>
 
-      {/* Vision Section - Modern Design */}
-      <section className={`vision-section ${isVisible ? 'visible' : ''}`} ref={visionRef}>
+      {/* Vision and Mission Wrapper - For side-by-side layout */}
+      <div className="vision-mission-wrapper">
         <div className="container">
-          <motion.div 
-            className="vision-modern-container"
-            initial="hidden"
-            animate={isVisionInView ? "visible" : "hidden"}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { 
-                opacity: 1,
-                transition: { 
-                  staggerChildren: 0.1,
-                  delayChildren: 0.2
-                }
-              }
-            }}
-          >
-            <motion.div className="vision-header" variants={headingVariants}>
-              <h2>Our Vision</h2>
-              <div className="vision-decoration-modern">
-                <div className="circle"></div>
-                <div className="line"></div>
-                <div className="circle"></div>
-              </div>
-            </motion.div>
-            
-            <motion.div className="vision-content-modern" variants={contentVariants}>
-              <div className="vision-quote">
-                <i className="fa-solid fa-quote-left quote-icon"></i>
-                <p>To be recognized as a leader in engineering services, known for our commitment to excellence, innovative solutions, and exceptional client relationships.</p>
-                <div className="vision-animated-underline"></div>
-              </div>
-              
-              <div className="vision-floating-shapes">
-                <div className="floating-shape shape1"></div>
-                <div className="floating-shape shape2"></div>
-                <div className="floating-shape shape3"></div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Mission Content Section */}
-      <section className={`mission-content-section ${isVisible ? 'visible' : ''}`} ref={missionRef}>
-        <div className="container">
-          <motion.div 
-            className="mission-modern-container"
-            initial="hidden"
-            animate={isMissionInView ? "visible" : "hidden"}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { 
-                opacity: 1,
-                transition: { 
-                  staggerChildren: 0.1,
-                  delayChildren: 0.2
-                }
-              }
-            }}
-          >
-            <motion.div className="mission-header" variants={headingVariants}>
-              <h2>Our Mission</h2>
-              <div className="mission-decoration-modern">
-                <div className="circle"></div>
-                <div className="line"></div>
-                <div className="circle"></div>
-              </div>
-              <motion.p variants={contentVariants}>Delivering excellence in engineering services through our core principles</motion.p>
-            </motion.div>
-
-            <motion.div className="mission-inline-container" variants={contentVariants}>
-              {[
-                "Quality assurance at every step",
-                "Client-centered approach",
-                "Innovation in engineering solutions",
-                "Sustainable development practices"
-              ].map((item, index) => (
-                <motion.div 
-                  key={index}
-                  className="mission-inline-item"
-                  custom={index}
-                  variants={listItemVariants}
-                  whileHover={{ 
-                    scale: 1.03,
-                    backgroundColor: index === 0 ? "#EEF2FF" : 
-                                    index === 1 ? "#F3E8FF" : 
-                                    index === 2 ? "#FCE7F3" : "#ECFDF5"
-                  }}
-                >
-                  <div className={`mission-inline-icon mission-icon-${index + 1}`}>
-                    <i className={
-                      index === 0 ? "fa-solid fa-check-double" : 
-                      index === 1 ? "fa-solid fa-users" : 
-                      index === 2 ? "fa-solid fa-lightbulb" : "fa-solid fa-leaf"
-                    }></i>
+          <div className="vision-mission-content">
+            {/* Vision Section - Modern Design */}
+            <section className={`vision-section ${isVisible ? 'visible' : ''}`} ref={visionRef}>
+              <motion.div 
+                className="vision-modern-container"
+                initial="hidden"
+                animate={isVisionInView ? "visible" : "hidden"}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { 
+                    opacity: 1,
+                    transition: { 
+                      staggerChildren: 0.1,
+                      delayChildren: 0.2
+                    }
+                  }
+                }}
+              >
+                <motion.div className="vision-header" variants={headingVariants}>
+                  <h2>Our Vision</h2>
+                  <div className="vision-decoration-modern">
+                    <div className="circle"></div>
+                    <div className="line"></div>
+                    <div className="circle"></div>
                   </div>
-                  <p>{item}</p>
                 </motion.div>
-              ))}
-            </motion.div>
-            
-            <motion.div 
-              className="mission-cta-modern"
-              variants={contentVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link to="/services">Explore Our Services</Link>
-            </motion.div>
-          </motion.div>
+                
+                <motion.div className="vision-content-modern" variants={contentVariants}>
+                  <div className="vision-quote">
+                    <i className="fa-solid fa-quote-left quote-icon"></i>
+                    <p>To be recognized as a leader in engineering services, known for our commitment to excellence, innovative solutions, and exceptional client relationships.</p>
+                    <div className="vision-animated-underline"></div>
+                  </div>
+                  
+                  <div className="vision-floating-shapes">
+                    <div className="floating-shape shape1"></div>
+                    <div className="floating-shape shape2"></div>
+                    <div className="floating-shape shape3"></div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </section>
+
+            {/* Mission Content Section */}
+            <section className={`mission-content-section ${isVisible ? 'visible' : ''}`} ref={missionRef}>
+              <motion.div 
+                className="mission-modern-container"
+                initial="hidden"
+                animate={isMissionInView ? "visible" : "hidden"}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { 
+                    opacity: 1,
+                    transition: { 
+                      staggerChildren: 0.1,
+                      delayChildren: 0.2
+                    }
+                  }
+                }}
+              >
+                <motion.div className="mission-header" variants={headingVariants}>
+                  <h2>Our Mission</h2>
+                  <div className="mission-decoration-modern">
+                    <div className="circle"></div>
+                    <div className="line"></div>
+                    <div className="circle"></div>
+                  </div>
+                </motion.div>
+
+                <motion.div className="mission-content-modern" variants={contentVariants}>
+                  <div className="mission-quote">
+                    
+                    <div className="mission-principles-list">
+                      {missionPrinciples.map((principle, index) => (
+                        <motion.div 
+                          key={principle.id}
+                          className="mission-principle-item"
+                          custom={index}
+                          variants={listItemVariants}
+                        >
+                          <div className={`mission-principle-icon ${principle.iconClass}`}>
+                            <i className={principle.icon}></i>
+                          </div>
+                          <p>{principle.text}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                    <div className="mission-animated-underline"></div>
+                  </div>
+                  
+                  <div className="mission-floating-shapes">
+                    <div className="floating-shape shape1"></div>
+                    <div className="floating-shape shape2"></div>
+                    <div className="floating-shape shape3"></div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </section>
+          </div>
         </div>
-      </section>
+      </div>
 
       {/* Core Values - Interactive Cards with 3D Tilt Effect */}
       <section className={`core-values-section ${isVisible ? 'visible' : ''}`}>
@@ -307,38 +326,17 @@ const Mission = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer CTA - Gradient Background with Parallax */}
-      <section className={`cta-section ${isVisible ? 'visible' : ''}`}>
-        <div className="cta-particles">
-          {[...Array(20)].map((_, i) => (
-            <div key={i} className="particle"></div>
-          ))}
-        </div>
-        <div className="container">
-          <motion.div 
-            className="cta-content"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <h2>Ready to Work Together?</h2>
-            <p>Let us help you achieve your engineering and project goals with our expert services</p>
-            <motion.div 
-              className="cta-buttons"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <Link to="/services" className="btn-primary">Our Services</Link>
-              <Link to="/contact" className="btn-secondary">Contact Us</Link>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
       </div>
+      {/* Journey Navigation - Next Page CTA */}
+      <NextPageCTA 
+        title="Explore Our Services" 
+        description="Discover our comprehensive range of engineering and consulting services designed to meet your project needs with precision and expertise."
+        nextPage={{
+          path: "/services",
+          label: "View Our Services"
+        }}
+        headingText="Next step of your journey"
+      />
       <Footer />
     </div>
   );

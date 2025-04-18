@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Credentials.css';
 import Footer from '../../components/Footer';
+import NextPageCTA from '../../components/NextPageCTA';
 // Import Font Awesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -23,13 +24,21 @@ import {
   faClipboardCheck
 } from '@fortawesome/free-solid-svg-icons';
 
-const Credentials = () => {
-  const [activeCard, setActiveCard] = useState(1);
-  const [isVisible, setIsVisible] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
-  const projectsRef = useRef(null);
+// Import company logos
+import EssarLogo from '../../assets/logos/Essar.jpeg';
+import VedantaLogo from '../../assets/logos/Vedanta.jpg';
+import AmwLogo from '../../assets/logos/AMW.jpg';
+import SterliteLogo from '../../assets/logos/Sterlite.png';
+import MittalLogo from '../../assets/logos/Mittal.jpg';
+import KalyaniLogo from '../../assets/logos/Kalyani.webp';
+import GerdauLogo from '../../assets/logos/Gerdau.jpeg';
+import JswLogo from '../../assets/logos/JSW.png';
+import DbPowerLogo from '../../assets/logos/DB Power.jpeg';
+import TalwandiLogo from '../../assets/logos/Talwandi Sabo.jpg';
+import UshaMartinLogo from '../../assets/logos/Usha Martin.png';
 
-  // Data for credential cards with complete content
+const Credentials = () => {
+  // Data for credential cards with complete content - Moved to the top before state declarations
   const credentialCards = [
     {
       id: 1,
@@ -110,6 +119,13 @@ const Credentials = () => {
     }
   ];
 
+  const [activeCard, setActiveCard] = useState(1);
+  const [activeTabLine, setActiveTabLine] = useState(1);
+  const [panelColor, setPanelColor] = useState(credentialCards[0].color);
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const projectsRef = useRef(null);
+
   useEffect(() => {
     setIsVisible(true);
 
@@ -141,6 +157,33 @@ const Credentials = () => {
     }
   };
 
+  const handleTabHover = (tabId) => {
+    setActiveCard(tabId);
+    setActiveTabLine(tabId);
+    // Set the panel color based on the hovered tab
+    const selectedCard = credentialCards.find(card => card.id === tabId);
+    setPanelColor(selectedCard.color);
+  };
+
+  // Map company names to logos
+  const getCompanyLogo = (projectName) => {
+    if (projectName.includes('ESSAR') || projectName.includes('Essar')) return EssarLogo;
+    if (projectName.includes('VEDANTA') || projectName.includes('Vedanta')) return VedantaLogo;
+    if (projectName.includes('Asia Motor') || projectName.includes('AMW')) return AmwLogo;
+    if (projectName.includes('Sterlite')) return SterliteLogo;
+    if (projectName.includes('HPCL Mittal') || projectName.includes('Mittal')) return MittalLogo;
+    if (projectName.includes('Kalyani')) return KalyaniLogo;
+    if (projectName.includes('Gerdau')) return GerdauLogo;
+    if (projectName.includes('JSW')) return JswLogo;
+    if (projectName.includes('DB Power')) return DbPowerLogo;
+    if (projectName.includes('Talwandi')) return TalwandiLogo;
+    if (projectName.includes('Usha Martin')) return UshaMartinLogo;
+    if (projectName.includes('VADINAR')) return EssarLogo; // Use Essar logo for VADINAR as they're related
+    
+    // Default fallback to building icon if no logo matches
+    return null;
+  };
+
   return (
     <div className="credentials-page">
       {/* Hero Section */}
@@ -150,7 +193,7 @@ const Credentials = () => {
             <span className="hero-title-main">Credentials</span>
           </h1>
           
-          <div className="feature-pills">
+          <div className="feature-pills" style={{ marginTop: '40px' }}>
             <div className="feature-pill">
               <FontAwesomeIcon icon={faCheckCircle} />
               Quality Assessment
@@ -164,7 +207,6 @@ const Credentials = () => {
               Smart Solutions
             </div>
           </div>
-          
           
           <button className="hero-button pulse-animation" onClick={scrollToProjects}>
             Explore Our Projects
@@ -212,7 +254,164 @@ const Credentials = () => {
         </div>
       </section>
 
-      {/* Industries Section */}
+      {/* Statistics Section - Moved just below hero section */}
+      <section className={`stats-section ${isVisible ? 'visible' : ''}`}>
+        <div className="container">
+          <div className="stats-grid">
+            <div className="stat-card">
+              <div className="stat-number">150+</div>
+              <div className="stat-label">Projects Completed</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-number">12+</div>
+              <div className="stat-label">Years Experience</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-number">50+</div>
+              <div className="stat-label">Industry Clients</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section className={`projects-section ${isVisible ? 'visible' : ''}`} ref={projectsRef}>
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">Our Project Expertise</h2>
+            <p className="section-subtitle">
+              Some of the major assignments completed by our team
+            </p>
+          </div>
+
+          <div className="credentials-tabs">
+            <div className="tabs-container">
+              {credentialCards.map((card) => (
+                <div
+                  key={card.id}
+                  className={`tab ${activeCard === card.id ? 'active' : ''}`}
+                  onMouseEnter={() => handleTabHover(card.id)}
+                  style={{ 
+                    '--tab-color': card.color,
+                    '--tab-shadow-color': `${card.color}40`
+                  }}
+                >
+                  <div className="tab-icon">
+                    <FontAwesomeIcon icon={card.id === 1 ? faBuilding : 
+                                         card.id === 2 ? faChartLine : 
+                                         card.id === 3 ? faClock :
+                                         faClipboardCheck} />
+                  </div>
+                  <h3 className="tab-title">{card.title}</h3>
+                </div>
+              ))}
+            </div>
+
+            <div className="tab-content">
+              {activeCard === 1 && (
+                <div className="content-panel active" style={{ '--panel-color': panelColor }}>
+                  <h2 className="panel-title" data-tab={activeTabLine}>{credentialCards[0].title}</h2>
+                  <div className="panel-content">
+                    <ul className="project-list">
+                      {credentialCards[0].projects.map((project, index) => (
+                        <li key={index} className="project-item">
+                          <div className="check-icon">
+                            {getCompanyLogo(project) ? 
+                              <img src={getCompanyLogo(project)} alt="Company Logo" className="company-logo" /> : 
+                              <FontAwesomeIcon icon={faBuilding} />
+                            }
+                          </div>
+                          <span>{project}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+
+              {activeCard === 2 && (
+                <div className="content-panel active" style={{ '--panel-color': panelColor }}>
+                  <h2 className="panel-title" data-tab={activeTabLine}>{credentialCards[1].title}</h2>
+                  <div className="panel-content">
+                    <p className="panel-description">{credentialCards[1].description}</p>
+                    <h3 className="company-heading">{credentialCards[1].companyHeading}</h3>
+                    <ul className="project-list">
+                      {credentialCards[1].companies.map((company, index) => (
+                        <li key={index} className="project-item">
+                          <div className="check-icon">
+                            {getCompanyLogo(company) ? 
+                              <img src={getCompanyLogo(company)} alt="Company Logo" className="company-logo" /> : 
+                              <FontAwesomeIcon icon={faBuilding} />
+                            }
+                          </div>
+                          <span>{company}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="other-companies">
+                      {credentialCards[1].otherProjects.map((project, index) => (
+                        <div key={index} className="other-company-item">
+                          <div className="company-icon">
+                            {getCompanyLogo(project) ? 
+                              <img src={getCompanyLogo(project)} alt="Company Logo" className="company-logo" /> : 
+                              <FontAwesomeIcon icon={faBuilding} />
+                            }
+                          </div>
+                          <p>{project}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeCard === 3 && (
+                <div className="content-panel active" style={{ '--panel-color': panelColor }}>
+                  <h2 className="panel-title" data-tab={activeTabLine}>{credentialCards[2].title}</h2>
+                  <div className="panel-content">
+                    <ul className="project-list">
+                      {credentialCards[2].projects.map((project, index) => (
+                        <li key={index} className="project-item">
+                          <div className="check-icon">
+                            {getCompanyLogo(project) ? 
+                              <img src={getCompanyLogo(project)} alt="Company Logo" className="company-logo" /> : 
+                              <FontAwesomeIcon icon={faBuilding} />
+                            }
+                          </div>
+                          <span>{project}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+
+              {activeCard === 4 && (
+                <div className="content-panel active" style={{ '--panel-color': panelColor }}>
+                  <h2 className="panel-title" data-tab={activeTabLine}>{credentialCards[3].title}</h2>
+                  <div className="panel-content">
+                    <ul className="project-list">
+                      {credentialCards[3].projects.map((project, index) => (
+                        <li key={index} className="project-item">
+                          <div className="check-icon">
+                            {getCompanyLogo(project) ? 
+                              <img src={getCompanyLogo(project)} alt="Company Logo" className="company-logo" /> : 
+                              <FontAwesomeIcon icon={faBuilding} />
+                            }
+                          </div>
+                          <span>{project}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Industries Section - Moved to be second */}
       <section className={`industries-section ${isVisible ? 'visible' : ''}`}>
         <div className="container">
           <div className="section-header">
@@ -222,6 +421,7 @@ const Credentials = () => {
             </p>
           </div>
           <div className="industries-grid">
+            {/* First Row */}
             <div className="industry-card">
               <div className="industry-icon">
                 <i className="fas fa-industry"></i>
@@ -252,6 +452,8 @@ const Credentials = () => {
               </div>
               <h3>Fertilizer</h3>
             </div>
+            
+            {/* Second Row */}
             <div className="industry-card">
               <div className="industry-icon">
                 <i className="fas fa-scroll"></i>
@@ -286,166 +488,16 @@ const Credentials = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section className={`projects-section ${isVisible ? 'visible' : ''}`} ref={projectsRef}>
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">Our Project Expertise</h2>
-            <p className="section-subtitle">
-              Some of the major assignments completed by our team
-            </p>
-          </div>
-
-          <div className="credentials-tabs">
-            <div className="tabs-container">
-              {credentialCards.map((card) => (
-                <div
-                  key={card.id}
-                  className={`tab ${activeCard === card.id ? 'active' : ''}`}
-                  onMouseEnter={() => setActiveCard(card.id)}
-                  style={{ 
-                    '--tab-color': card.color,
-                    '--tab-shadow-color': `${card.color}40`
-                  }}
-                >
-                  <div className="tab-icon">
-                    <FontAwesomeIcon icon={card.id === 1 ? faBuilding : 
-                                         card.id === 2 ? faChartLine : 
-                                         card.id === 3 ? faClock :
-                                         faClipboardCheck} />
-                  </div>
-                  <h3 className="tab-title">{card.title}</h3>
-                </div>
-              ))}
-            </div>
-
-            <div className="tab-content">
-              {activeCard === 1 && (
-                <div className="content-panel active" style={{ '--panel-color': credentialCards[0].color }}>
-                  <h2 className="panel-title">{credentialCards[0].title}</h2>
-                  <div className="panel-content">
-                    <ul className="project-list">
-                      {credentialCards[0].projects.map((project, index) => (
-                        <li key={index} className="project-item">
-                          <div className="check-icon">
-                            <FontAwesomeIcon icon={faCheckCircle} />
-                          </div>
-                          <span>{project}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
-
-              {activeCard === 2 && (
-                <div className="content-panel active" style={{ '--panel-color': credentialCards[1].color }}>
-                  <h2 className="panel-title">{credentialCards[1].title}</h2>
-                  <div className="panel-content">
-                    <p className="panel-description">{credentialCards[1].description}</p>
-                    <h3 className="company-heading">{credentialCards[1].companyHeading}</h3>
-                    <ul className="project-list">
-                      {credentialCards[1].companies.map((company, index) => (
-                        <li key={index} className="project-item">
-                          <div className="check-icon">
-                            <FontAwesomeIcon icon={faCheckCircle} />
-                          </div>
-                          <span>{company}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="other-companies">
-                      {credentialCards[1].otherProjects.map((project, index) => (
-                        <div key={index} className="other-company-item">
-                          <div className="company-icon">
-                            <FontAwesomeIcon icon={faBuilding} />
-                          </div>
-                          <p>{project}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {activeCard === 3 && (
-                <div className="content-panel active" style={{ '--panel-color': credentialCards[2].color }}>
-                  <h2 className="panel-title">{credentialCards[2].title}</h2>
-                  <div className="panel-content">
-                    <ul className="project-list">
-                      {credentialCards[2].projects.map((project, index) => (
-                        <li key={index} className="project-item">
-                          <div className="check-icon">
-                            <FontAwesomeIcon icon={faCheckCircle} />
-                          </div>
-                          <span>{project}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
-
-              {activeCard === 4 && (
-                <div className="content-panel active" style={{ '--panel-color': credentialCards[3].color }}>
-                  <h2 className="panel-title">{credentialCards[3].title}</h2>
-                  <div className="panel-content">
-                    <ul className="project-list">
-                      {credentialCards[3].projects.map((project, index) => (
-                        <li key={index} className="project-item">
-                          <div className="check-icon">
-                            <FontAwesomeIcon icon={faCheckCircle} />
-                          </div>
-                          <span>{project}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Statistics Section */}
-      <section className={`stats-section ${isVisible ? 'visible' : ''}`}>
-        <div className="container">
-          <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-number">150+</div>
-              <div className="stat-label">Projects Completed</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-number">12+</div>
-              <div className="stat-label">Years Experience</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-number">50+</div>
-              <div className="stat-label">Industry Partners</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-number">95%</div>
-              <div className="stat-label">Client Satisfaction</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className={`cta-section ${isVisible ? 'visible' : ''}`}>
-        <div className="container">
-          <div className="cta-content">
-            <h2 className="cta-title">Ready to work with us?</h2>
-            <p className="cta-text">
-              Let us help you with your asset management, valuation, and verification needs
-            </p>
-            <Link to="/contact" className="cta-button">
-              Contact Us Today
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Journey Navigation - Next Page CTA */}
+      <NextPageCTA 
+        title="Get In Touch" 
+        description="Ready to start your project? Reach out to our team for personalized solutions and expert consultation tailored to your specific needs."
+        nextPage={{
+          path: "/contact",
+          label: "Contact Us Now"
+        }}
+        headingText="LAST STEP OF OUR JOURNEY"
+      />
       <Footer />
     </div>
   );

@@ -9,7 +9,7 @@
     transform: translateY(0);
   }
 }
-
+ 
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -21,7 +21,7 @@
     transform: scale(1);
   }
 }
-
+ 
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -30,26 +30,26 @@
     background-position: 200% 0;
   }
 }
-
+ 
 /* Footer styling based on the provided design */
 /* Add animations */
 @keyframes waveAnimation {
   0% { transform: translateY(0) scaleY(1); }
-  50% { transform: translateY(-5px) scaleY(1.05); }
+  50% { transform: translateY(-3px) scaleY(1.03); }
   100% { transform: translateY(0) scaleY(1); }
 }
-
+ 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
+ 
 @keyframes glowEffect {
   0% { box-shadow: 0 0 5px rgba(26, 115, 232, 0.1); }
   50% { box-shadow: 0 0 15px rgba(26, 115, 232, 0.3); }
   100% { box-shadow: 0 0 5px rgba(26, 115, 232, 0.1); }
 }
-
+ 
 @keyframes shine {
   0% {
     background-position: -100% 0;
@@ -58,38 +58,40 @@
     background-position: 200% 0;
   }
 }
-
+ 
 .footer {
   position: relative;
-  background-color: #e6f7ff; /* Changed to light blue background */
+  background-color: #e6f7ff;
   color: #000;
   font-family: 'Arial', sans-serif;
-  padding: 50px 0 20px;
-  margin-top: 100px; /* Increased to accommodate larger curve */
+  padding: 30px 0 15px;
+  margin-top: 50px;
   width: 100%;
   box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.5s ease;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
-
+ 
 .footer:hover {
   box-shadow: 0 -8px 25px rgba(26, 115, 232, 0.1);
 }
-
-/* Wave at the top of footer */
+ 
+/* Wave at the top of footer - extended to fully cover right side */
 .footer-wave {
   position: absolute;
-  top: -120px; /* Increased to make curve larger */
+  top: -50px;
   left: 0;
   width: 100%;
-  height: 120px; /* Increased height for larger curve */
+  height: 50px;
   background-color: #4fc3f7;
   background-image: linear-gradient(135deg, #4fc3f7 0%, #1a73e8 100%);
-  clip-path: path('M0,0 C400,120 800,0 1440,120 L1440,0 L0,0 Z'); /* Modified curve to be larger */
+  clip-path: path('M0,0 C300,50 700,0 1920,50 L1920,0 L0,0 Z');
   animation: waveAnimation 6s infinite ease-in-out;
   position: relative;
   overflow: hidden;
 }
-
+ 
 /* Add a shimmering light effect to the wave */
 .footer-wave::after {
   content: '';
@@ -106,7 +108,7 @@
   );
   animation: shine 4s infinite linear;
 }
-
+ 
 .footer-content {
   display: flex;
   flex-wrap: wrap;
@@ -116,49 +118,55 @@
   justify-content: space-between;
   position: relative;
   z-index: 1;
+  gap: 30px;
 }
-
+ 
 .footer-column {
   flex: 1;
   min-width: 200px;
   padding: 0 15px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-align: left;
   animation: fadeIn 0.8s ease-out forwards;
   opacity: 0;
 }
-
+ 
 .footer-column:nth-child(1) {
   animation-delay: 0.1s;
+  flex: 1.2;
 }
-
+ 
 .footer-column:nth-child(2) {
   animation-delay: 0.3s;
+  padding-left: 20px;
+  flex: 0.8;
 }
-
+ 
 .footer-column:nth-child(3) {
   animation-delay: 0.5s;
+  flex: 0.8;
 }
-
+ 
 .footer-column:nth-child(4) {
   animation-delay: 0.7s;
+  flex: 1.2;
 }
-
+ 
 .footer-column h3 {
-  color: #1a73e8; /* Changed to blue color */
-  font-size: 18px;
+  color: #1a73e8;
+  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   position: relative;
   display: inline-block;
   transition: transform 0.3s ease, color 0.3s ease;
 }
-
+ 
 .footer-column h3:hover {
   transform: translateX(5px);
   color: #4fc3f7;
 }
-
+ 
 .footer-column h3::after {
   content: '';
   position: absolute;
@@ -166,55 +174,55 @@
   bottom: -8px;
   width: 40px;
   height: 2px;
-  background-color: #1a73e8; /* Changed to blue color */
+  background-color: #1a73e8;
   background-image: linear-gradient(90deg, #1a73e8, #4fc3f7);
   background-size: 200% auto;
   animation: shimmer 3s infinite linear;
   transition: width 0.3s ease;
 }
-
+ 
 .footer-column h3:hover::after {
   width: 100%;
 }
-
+ 
 .footer-column p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #000; /* Changed from #555 to black */
+  font-size: 13px;
+  line-height: 1.5;
+  color: #000;
   max-width: 300px;
   text-align: left;
   transition: color 0.3s ease, transform 0.3s ease;
 }
-
+ 
 .footer-column p:hover {
-  color: #000; /* Changed from #333 to black */
+  color: #000;
   transform: translateY(-2px);
 }
-
+ 
 .footer-column ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
+ 
 .footer-column ul li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   transition: transform 0.3s ease;
 }
-
+ 
 .footer-column ul li:hover {
   transform: translateX(5px);
 }
-
+ 
 .footer-column ul li a {
-  color: #000; /* Changed from #555 to black */
+  color: #000;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   transition: color 0.3s ease;
   display: inline-block;
   position: relative;
 }
-
+ 
 .footer-column ul li a::after {
   content: '';
   position: absolute;
@@ -225,102 +233,106 @@
   background-color: #1a73e8;
   transition: width 0.3s ease;
 }
-
+ 
 .footer-column ul li a:hover {
-  color: #1a73e8; /* Changed to blue color */
+  color: #1a73e8;
 }
-
+ 
 .footer-column ul li a:hover::after {
   width: 100%;
 }
-
-/* Contact info styling */
+ 
+/* Contact info styling - completely revised */
 .contact-info {
-  font-style: normal;
-  font-size: 14px;
-  color: #000; /* Changed from #555 to black */
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  color: #000;
+  width: 100%;
 }
 
 .location-item {
   display: flex;
-  align-items: flex-start;
   margin-bottom: 15px;
-  padding: 5px;
-  border-radius: 5px;
   transition: all 0.3s ease;
-}
-
-.location-item:hover {
-  background-color: rgba(26, 115, 232, 0.05);
-  transform: translateX(5px);
+  width: 100%;
 }
 
 .location-item i {
-  color: #1a73e8; /* Changed to blue color */
-  margin-right: 10px;
+  color: #1a73e8;
   font-size: 16px;
-  margin-top: 3px;
+  margin-right: 10px;
+  margin-top: 4px;
+  min-width: 16px;
+  text-align: center;
+  flex-shrink: 0;
   transition: transform 0.3s ease;
-}
-
-.location-item:hover i {
-  transform: scale(1.2);
 }
 
 .location-text {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .location-text p {
   margin: 0 0 3px 0;
   line-height: 1.4;
-  color: #000; /* Ensuring all text is black */
+  padding: 0;
+  color: #000;
+  text-align: left;
 }
 
 .company-name {
   font-weight: 600;
-  color: #000; /* Changed from #333 to black */
-  margin-bottom: 5px !important;
+  margin-bottom: 6px !important;
 }
 
-/* Phone and email styles */
 .contact-info > p {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  padding: 5px;
-  border-radius: 5px;
+  padding: 3px 0;
   transition: all 0.3s ease;
-  color: #000; /* Ensuring all text is black */
+  width: 100%;
 }
 
-.contact-info > p:hover {
-  background-color: rgba(26, 115, 232, 0.05);
-  transform: translateX(5px);
+.contact-info > p span {
+  display: inline-block;
+  padding-left: 2px;
 }
 
 .contact-info > p i {
-  color: #1a73e8; /* Changed to blue color */
-  margin-right: 10px;
+  color: #1a73e8;
   font-size: 16px;
+  margin-right: 10px;
+  min-width: 16px;
+  flex-shrink: 0;
+  text-align: center;
   transition: transform 0.3s ease;
 }
 
+/* Hover effects */
+.location-item:hover,
+.contact-info > p:hover {
+  transform: translateX(5px);
+}
+
+.location-item:hover i,
 .contact-info > p:hover i {
-  transform: scale(1.2) rotate(15deg);
+  transform: scale(1.2);
 }
 
 .footer-bottom {
   text-align: center;
-  padding: 20px 0;
-  border-top: 1px solid #c8e3ff; /* Changed to light blue border */
-  margin-top: 20px;
-  background-color: #d5efff; /* Changed to slightly darker light blue */
+  padding: 15px 0;
+  border-top: 1px solid #c8e3ff;
+  margin-top: 15px;
+  background-color: #d5efff;
   position: relative;
   overflow: hidden;
 }
-
+ 
 .footer-bottom::before {
   content: '';
   position: absolute;
@@ -332,48 +344,64 @@
   transform: translateX(-50%);
   transition: width 0.5s ease;
 }
-
+ 
 .footer:hover .footer-bottom::before {
   width: 80%;
 }
-
+ 
 .footer-bottom p {
-  color: #000; /* Changed from #555 to black */
-  font-size: 14px;
+  color: #000;
+  font-size: 13px;
   margin: 0;
   position: relative;
   display: inline-block;
   transition: all 0.3s ease;
 }
-
+ 
 .footer-bottom p:hover {
   color: #1a73e8;
   transform: translateY(-2px);
 }
-
+ 
 /* Glow effect for important elements */
 .company-name:hover,
 .footer-column h3:hover {
   animation: glowEffect 2s infinite ease-in-out;
 }
-
+ 
+/* Fix for mobile */
 @media (max-width: 768px) {
+  .footer {
+    padding: 25px 0 10px;
+    margin-top: 30px;
+  }
+ 
+  .footer-wave {
+    top: -30px;
+    height: 30px;
+  }
+ 
+  .footer-column {
+    min-width: 100%;
+    margin-bottom: 25px;
+    padding: 0;
+  }
+  
   .footer-content {
     flex-direction: column;
+    padding: 0 15px;
+    gap: 15px;
   }
   
-  .footer-column {
+  .contact-info {
     width: 100%;
+  }
+  
+  .footer-column:nth-child(1),
+  .footer-column:nth-child(2),
+  .footer-column:nth-child(3),
+  .footer-column:nth-child(4) {
     padding: 0;
-    margin-bottom: 30px;
   }
-  
-  .footer-column:not(:last-child) {
-    margin-bottom: 30px;
-  }
-  
-  .footer-wave {
-    top: -60px;
-    height: 60px;
-  }
-} 
+}
+ 
