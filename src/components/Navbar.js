@@ -14,19 +14,11 @@ const Navbar = () => {
   return (
     <header className="navbar-wrapper">
       <nav className="navbar navbar-expand-lg">
-        <div className="container">
+        <div className="container-fluid">
           <div className="navbar-logo-section">
             <Link className="navbar-brand" to="/" onClick={scrollToTop}>
               <img src={logo} className="logo" alt="LOGO" />
             </Link>
-            <div className="contact-buttons">
-              <a href="tel:+919966222370" className="contact-button">
-                <i className="fas fa-phone"></i> Call Us
-              </a>
-              <a href="mailto:info@vardaanresources.com" className="contact-button">
-                <i className="fas fa-envelope"></i> Email Us
-              </a>
-            </div>
           </div>
           
           <button 
@@ -42,14 +34,14 @@ const Navbar = () => {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto align-items-center">
+            <ul className="navbar-nav mx-auto align-items-center">
               <li className="nav-item">
                 <Link 
                   to="/" 
                   className={`nav-link ${activePage === '' || activePage === 'index' ? 'active' : ''}`}
                   onClick={scrollToTop}
                 >
-              Home
+                  <i className="fas fa-home nav-icon"></i> Home
                 </Link>
               </li>
               <li className="nav-item">
@@ -58,7 +50,7 @@ const Navbar = () => {
                   className={`nav-link ${activePage === 'mission' ? 'active' : ''}`}
                   onClick={scrollToTop}
                 >
-                  Our Mission
+                  <i className="fas fa-bullseye nav-icon"></i> Mission
                 </Link>
               </li>
               <li className="nav-item">
@@ -67,7 +59,7 @@ const Navbar = () => {
                   className={`nav-link ${activePage === 'services' ? 'active' : ''}`}
                   onClick={scrollToTop}
                 >
-                  Our Services
+                  <i className="fas fa-hands-helping nav-icon"></i> Our Services
                 </Link>
               </li>
               <li className="nav-item">
@@ -76,7 +68,7 @@ const Navbar = () => {
                   className={`nav-link ${activePage === 'management' ? 'active' : ''}`}
                   onClick={scrollToTop}
                 >
-                  Management
+                  <i className="fas fa-users nav-icon"></i> Management
                 </Link>
               </li>
               <li className="nav-item">
@@ -85,7 +77,7 @@ const Navbar = () => {
                   className={`nav-link ${activePage === 'credentials' ? 'active' : ''}`}
                   onClick={scrollToTop}
                 >
-                  Credentials
+                  <i className="fas fa-award nav-icon"></i> Credentials
                 </Link>
               </li>
               <li className="nav-item">
@@ -94,10 +86,18 @@ const Navbar = () => {
                   className={`nav-link ${activePage === 'contact' ? 'active' : ''}`}
                   onClick={scrollToTop}
                 >
-                  Contact Us
+                  <i className="fas fa-address-card nav-icon"></i> Contact Us
                 </Link>
               </li>
             </ul>
+            <div className="contact-buttons">
+              <a href="tel:+919966222370" className="contact-button phone-button">
+                <i className="fas fa-phone-alt"></i> Call Us
+              </a>
+              <a href="mailto:www.vardaanglobal.com" className="contact-button email-button">
+                <i className="fas fa-envelope-open-text"></i> Email Us
+              </a>
+            </div>
           </div>
         </div>
       </nav>

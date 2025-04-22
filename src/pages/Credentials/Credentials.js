@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Credentials.css';
 import Footer from '../../components/Footer';
 import NextPageCTA from '../../components/NextPageCTA';
+import BannerLogo from '../../components/BannerLogo';
 // Import Font Awesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -188,6 +189,7 @@ const Credentials = () => {
     <div className="credentials-page">
       {/* Hero Section */}
       <section className={`hero-section ${isVisible ? 'visible' : ''}`}>
+        <BannerLogo />
         <div className="hero-content">
           <h1 className="hero-title">
             <span className="hero-title-main">Credentials</span>

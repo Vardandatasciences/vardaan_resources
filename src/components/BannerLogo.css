@@ -1,0 +1,30 @@
+/* Banner Logo Watermark Styles */
+.banner-logo-watermark {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  transform: none;
+  z-index: 5;
+  opacity: 0.5;
+  width: 100px;
+  height: auto;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .banner-logo-watermark {
+    width: 80px;
+    left: 20px;
+    top: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-logo-watermark {
+    width: 60px;
+    left: 15px;
+    top: 15px;
+  }
+} 

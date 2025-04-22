@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Contact.css';
-import Footer from '../../components/Footer'; 
+import Footer from '../../components/Footer';
+import BannerLogo from '../../components/BannerLogo';
 import NextPageCTA from '../../components/NextPageCTA';
 
 const Contact = () => {
@@ -130,17 +131,23 @@ const Contact = () => {
       <div className={`contact-page ${isLoaded ? 'loaded' : ''}`}>
         {/* Hero Section */}
         <section className={`contact-hero ${isVisible ? 'visible' : ''}`}>
-          <div className="floating-squares">
-            <div className="square"></div>
-            <div className="square"></div>
-            <div className="square"></div>
-            <div className="square"></div>
-            <div className="square"></div>
-            <div className="square"></div>
+          <BannerLogo />
+          <div className="hero-3d-scene">
+            <div className="scene-particle"></div>
+            <div className="scene-particle"></div>
+            <div className="scene-particle"></div>
+            <div className="scene-particle"></div>
+            <div className="scene-particle"></div>
+            <div className="scene-particle"></div>
+            <div className="scene-particle"></div>
+            <div className="scene-particle"></div>
+            <div className="scene-particle"></div>
+            <div className="scene-particle"></div>
           </div>
           <div className="container">
             <div className="hero-content">
               <h1 className="animate-on-load">Contact Us</h1>
+              <div className="hero-decoration"></div>
             </div>
           </div>
         </section>
@@ -165,7 +172,8 @@ const Contact = () => {
                     <i className="fas fa-phone-volume"></i>
                   </div>
                   <h3>Phone Number</h3>
-                  <p>+91 99662 22370</p>
+                  <p>Tel: +91 40 3517 1118</p>
+                  <p>Mob: +91 99662 22370</p>
                 </div>
                 
                 <div className="contact-card" style={{animationDelay: '0.5s'}}>
@@ -173,7 +181,7 @@ const Contact = () => {
                     <i className="fas fa-envelope-open-text"></i>
                   </div>
                   <h3>Email Us</h3>
-                  <p>contact@vardaanresources.com</p>
+                  <p>www.vardaanglobal.com</p>
                 </div>
                 
                 <div className="contact-card" style={{animationDelay: '0.7s'}}>
@@ -193,14 +201,14 @@ const Contact = () => {
                   {/* Map */}
                   <div className="map-wrapper">
                     <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.255718434639!2d78.3564716713452!3d17.447470564518333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93318bc85167%3A0x121d25c11fd5e289!2sAurum!5e0!3m2!1sen!2sin!4v1701322901964!5m2!1sen!2sin" 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.255718434639!2d78.3564716713452!3d17.447470564518333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI2JzUwLjkiTiA3OMKwMjEnMjkuNyJF!5e0!3m2!1sen!2sin!4v1701322901964!5m2!1sen!2sin" 
                       width="100%" 
                       height="100%" 
                       style={{ border: 0 }} 
                       allowFullScreen 
                       loading="lazy" 
                       referrerPolicy="no-referrer-when-downgrade"
-                      title="Office Map"
+                      title="Office Location Map"
                     ></iframe>
                   </div>
                 </div>

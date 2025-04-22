@@ -3,6 +3,7 @@ import './Home.css';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import NextPageCTA from '../../components/NextPageCTA';
+import BannerLogo from '../../components/BannerLogo';
 import resourcesVideo from '../../assets/videos/resources1.mp4';
 import expertsVideo from '../../assets/videos/experts.mp4';
 import projectImage1 from '../../assets/images/p1.png';
@@ -220,6 +221,7 @@ const Home = () => {
         className="hero-banner" 
         style={{ backgroundImage: `url(${heroSlides[activeHeroSlide].background})` }}
       >
+        <BannerLogo />
         <div className="overlay"></div>
         <div className="hero-text">
           {heroSlides[activeHeroSlide].title}
@@ -563,11 +565,11 @@ const Home = () => {
     </div>
       {/* Journey Navigation - Next Page CTA */}
       <NextPageCTA 
-        title="Discover Our Mission & Vision" 
+        title="Discover Mission" 
         description="Learn about our vision, mission, and the core values that drive our commitment to excellence in engineering services."
         nextPage={{
           path: "/mission",
-          label: "Explore Our Mission & Vision"
+          label: "Explore Mission"
         }}
         headingText="Embark Your Journey"
       />

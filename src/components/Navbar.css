@@ -9,10 +9,11 @@
 }
 
 /* Container to add space between sections */
-.navbar .container {
+.navbar .container-fluid {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 2rem;
 }
 
 /* Logo section styling */
@@ -20,7 +21,6 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  margin-right: auto;
 }
 
 /* New contact button styles */
@@ -28,15 +28,14 @@
   display: flex;
   gap: 10px;
   margin-left: 15px;
+  flex-shrink: 0;
 }
 
 .contact-button {
   display: flex;
   align-items: center;
   padding: 8px 15px;
-  border: 1px solid #333;
   border-radius: 25px;
-  color: #333;
   text-decoration: none;
   font-size: 14px;
   transition: all 0.3s ease;
@@ -44,12 +43,43 @@
 
 .contact-button i {
   margin-right: 8px;
+  font-size: 1.1rem;
 }
 
-.contact-button:hover {
-  background-color: #0066cc;
-  border-color: #0066cc;
+/* Phone button styling */
+.phone-button {
+  background-color: #4CAF50;
+  border: 1px solid #4CAF50;
   color: white;
+}
+
+.phone-button:hover {
+  background-color: #388E3C;
+  border-color: #388E3C;
+}
+
+/* Email button styling */
+.email-button {
+  background-color: #DB4437;
+  border: 1px solid #DB4437;
+  color: white;
+}
+
+.email-button:hover {
+  background-color: #C53929;
+  border-color: #C53929;
+}
+
+/* Navigation icons styling */
+.nav-icon {
+  margin-right: 6px;
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover .nav-icon,
+.nav-link.active .nav-icon {
+  transform: scale(1.2);
 }
 
 /* WhatsApp button specific style */
@@ -65,8 +95,10 @@
 
 /* Navigation section styling */
 .navbar-collapse {
-  flex-grow: 0;
-  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
 }
 
 /* Original styles below */
@@ -88,7 +120,7 @@
 }
 
 .navbar-nav {
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .nav-link {
@@ -98,6 +130,8 @@
   padding: 0.5rem 0.8rem !important;
   transition: color 0.3s ease;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .nav-link:hover,
@@ -133,33 +167,17 @@
 }
 
 @media (max-width: 991px) {
-  .navbar .container {
+  .navbar .container-fluid {
     flex-wrap: wrap;
+    padding: 0 1rem;
   }
   
   .navbar-logo-section {
     margin-right: 0;
   }
   
-  .contact-buttons {
-    display: none; /* Hide on mobile */
-  }
-  
-  /* Add mobile contact buttons to navbar collapse */
-  .navbar-collapse .contact-buttons {
-    display: flex;
-    flex-direction: column;
-    margin-top: 15px;
-    margin-left: 0;
-    width: 100%;
-  }
-  
-  .navbar-collapse .contact-button {
-    margin-bottom: 8px;
-    justify-content: center;
-  }
-  
   .navbar-collapse {
+    flex-direction: column;
     background: white;
     padding: 1rem;
     border-radius: 8px;
@@ -170,10 +188,24 @@
 
   .navbar-nav {
     gap: 0.5rem;
+    margin: 0 auto 1rem auto; /* Add bottom margin for separation */
+    width: 100%;
   }
 
   .nav-link {
     padding: 0.5rem 1rem !important;
+  }
+
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .contact-button {
+    margin-bottom: 8px;
+    justify-content: center;
   }
 
   .dropdown-menu {
@@ -188,5 +220,7 @@
 }
 
 @media (max-width: 576px) {
-  /* Additional small screen styles if needed */
+  .navbar .container-fluid {
+    padding: 0 0.5rem;
+  }
 } 

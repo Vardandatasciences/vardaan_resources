@@ -4,15 +4,14 @@ import './Mission.css';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import Footer from '../../components/Footer'; 
 import NextPageCTA from '../../components/NextPageCTA';
+import BannerLogo from '../../components/BannerLogo';
 
 const Mission = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeCard, setActiveCard] = useState(null);
   const heroRef = useRef(null);
-  const visionRef = useRef(null);
   const missionRef = useRef(null);
   const isHeroInView = useInView(heroRef);
-  const isVisionInView = useInView(visionRef, { once: true, amount: 0.3 });
   const isMissionInView = useInView(missionRef, { once: true, amount: 0.3 });
   
   const { scrollYProgress } = useScroll();
@@ -98,27 +97,33 @@ const Mission = () => {
   const missionPrinciples = [
     {
       id: 1,
-      text: "Quality assurance at every step",
+      text: "Committed to providing quality engineering services in the fields of project evaluation, technical audit, monitoring and due diligence.",
       icon: "fa-solid fa-check-double",
       iconClass: "mission-icon-1"
     },
     {
       id: 2,
-      text: "Client-centered approach",
-      icon: "fa-solid fa-users",
+      text: "Develop cost effective solutions that meet specific needs of our clients consistent with long term development of the industry.",
+      icon: "fa-solid fa-code",
       iconClass: "mission-icon-2"
     },
     {
       id: 3,
-      text: "Innovation in engineering solutions",
-      icon: "fa-solid fa-lightbulb",
+      text: "Provide our customers with the complete range and highest quality of information and services.",
+      icon: "fa-solid fa-chart-line",
       iconClass: "mission-icon-3"
     },
     {
       id: 4,
-      text: "Sustainable development practices",
-      icon: "fa-solid fa-leaf",
+      text: "Building customer relationships by focusing on customer needs and striving to exceed their expectations through flexible customer driven solutions.",
+      icon: "fa-solid fa-users",
       iconClass: "mission-icon-4"
+    },
+    {
+      id: 5,
+      text: "Maintain high standards of professional conduct and to comply with all the rules and regulations relating to our work.",
+      icon: "fa-solid fa-shield-halved",
+      iconClass: "mission-icon-5"
     }
   ];
 
@@ -144,6 +149,7 @@ const Mission = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
+        <BannerLogo />
         <motion.div 
           className="hero-content"
           style={{ y: parallaxY, opacity: opacityTransform }}
@@ -153,7 +159,7 @@ const Mission = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Our Mission & Vision
+            Mission
           </motion.h1>
           <motion.div 
             className="hero-decoration"
@@ -175,52 +181,10 @@ const Mission = () => {
         </motion.div>
       </motion.section>
 
-      {/* Vision and Mission Wrapper - For side-by-side layout */}
+      {/* Mission Wrapper */}
       <div className="vision-mission-wrapper">
         <div className="container">
-          <div className="vision-mission-content">
-            {/* Vision Section - Modern Design */}
-            <section className={`vision-section ${isVisible ? 'visible' : ''}`} ref={visionRef}>
-              <motion.div 
-                className="vision-modern-container"
-                initial="hidden"
-                animate={isVisionInView ? "visible" : "hidden"}
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: { 
-                    opacity: 1,
-                    transition: { 
-                      staggerChildren: 0.1,
-                      delayChildren: 0.2
-                    }
-                  }
-                }}
-              >
-                <motion.div className="vision-header" variants={headingVariants}>
-                  <h2>Our Vision</h2>
-                  <div className="vision-decoration-modern">
-                    <div className="circle"></div>
-                    <div className="line"></div>
-                    <div className="circle"></div>
-                  </div>
-                </motion.div>
-                
-                <motion.div className="vision-content-modern" variants={contentVariants}>
-                  <div className="vision-quote">
-                    <i className="fa-solid fa-quote-left quote-icon"></i>
-                    <p>To be recognized as a leader in engineering services, known for our commitment to excellence, innovative solutions, and exceptional client relationships.</p>
-                    <div className="vision-animated-underline"></div>
-                  </div>
-                  
-                  <div className="vision-floating-shapes">
-                    <div className="floating-shape shape1"></div>
-                    <div className="floating-shape shape2"></div>
-                    <div className="floating-shape shape3"></div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </section>
-
+          <div className="vision-mission-content mission-only">
             {/* Mission Content Section */}
             <section className={`mission-content-section ${isVisible ? 'visible' : ''}`} ref={missionRef}>
               <motion.div 
@@ -239,7 +203,7 @@ const Mission = () => {
                 }}
               >
                 <motion.div className="mission-header" variants={headingVariants}>
-                  <h2>Our Mission</h2>
+                  <h2>Mission</h2>
                   <div className="mission-decoration-modern">
                     <div className="circle"></div>
                     <div className="line"></div>

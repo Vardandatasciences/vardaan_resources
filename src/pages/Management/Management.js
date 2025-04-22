@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Management.css';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import BannerLogo from '../../components/BannerLogo';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointer, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -121,6 +122,7 @@ const Management = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
+          <BannerLogo />
           <h1 className="management-title">Management Team</h1>
           <div className="title-underline"></div>
         </motion.div>

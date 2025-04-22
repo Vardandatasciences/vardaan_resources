@@ -357,6 +357,27 @@
   gap: 40px;
 }
 
+/* Mission-only layout adjustment */
+.mission-only {
+  justify-content: center;
+}
+
+.mission-only .mission-content-section {
+  max-width: 700px;
+  width: 100%;
+}
+
+.mission-only .mission-quote {
+  background: white;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.mission-only .mission-quote:hover {
+  transform: translateY(-5px);
+}
+
 /* Vision Section - Modern Design */
 .vision-section,
 .mission-content-section {
@@ -440,8 +461,8 @@
   border-radius: 16px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  height: 350px;
-  min-height: 350px;
+  height: 420px;
+  min-height: 420px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -498,7 +519,7 @@
 .mission-principles-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 15px;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -632,6 +653,11 @@
 }
 
 .mission-principle-icon.mission-icon-4 {
+  background: linear-gradient(135deg, #F97316, #FB923C);
+  box-shadow: 0 5px 10px rgba(249, 115, 22, 0.2);
+}
+
+.mission-principle-icon.mission-icon-5 {
   background: linear-gradient(135deg, #10B981, #34D399);
   box-shadow: 0 5px 10px rgba(16, 185, 129, 0.2);
 }
@@ -672,8 +698,8 @@
   
   .vision-quote, 
   .mission-quote {
-    height: 320px;
-    min-height: 320px;
+    height: 450px;
+    min-height: 450px;
   }
 }
 
@@ -699,7 +725,7 @@
   .vision-quote, 
   .mission-quote {
     height: auto;
-    min-height: 280px;
+    min-height: 480px;
     padding: 35px 25px;
   }
   
@@ -713,7 +739,7 @@
   }
   
   .mission-principle-item p {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
   
   .mission-principle-icon {

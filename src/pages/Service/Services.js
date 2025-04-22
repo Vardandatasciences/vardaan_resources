@@ -4,6 +4,7 @@ import './Services.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Footer from '../../components/Footer';
 import NextPageCTA from '../../components/NextPageCTA';
+import BannerLogo from '../../components/BannerLogo';
 import { 
   faDatabase, faBrain, faBalanceScale, faSearchDollar, 
   faChartLine, faBuilding, faClipboardCheck, faFileInvoiceDollar,
@@ -42,6 +43,9 @@ function Services() {
 
   const toggleExpandCard = (index, e) => {
     e.stopPropagation();
+    e.preventDefault();
+    
+    console.log("Toggle expand card for index:", index);
     
     // First, set animation class to out if there's an expanded card
     if (expandedCards.length > 0) {
@@ -51,15 +55,18 @@ function Services() {
       setTimeout(() => {
         // If clicking the same card that's already expanded, collapse it
         if (expandedCards.includes(index)) {
+          console.log("Collapsing card:", index);
           setExpandedCards([]);
         } else {
           // Otherwise, collapse any existing expanded card and expand the clicked one
+          console.log("Switching to card:", index);
           setExpandedCards([index]);
           setAnimationClass('animate-in');
         }
       }, 300); // Match this timing with CSS animation duration
     } else {
       // If no card is expanded, just expand and animate in
+      console.log("Expanding card:", index);
       setExpandedCards([index]);
       setAnimationClass('animate-in');
     }
@@ -81,33 +88,157 @@ function Services() {
     if (index === 0) {
       return (
         <>
-          <div className="service-expanded-title">
-            <div className="service-icon">
+          <div className="service-expanded-title" style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            marginBottom: '20px', 
+            paddingBottom: '15px', 
+            borderBottom: '1px solid rgba(0, 0, 0, 0.05)' 
+          }}>
+            <div className="service-icon" style={{ 
+              width: '50px', 
+              height: '50px', 
+              borderRadius: '10px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              marginRight: '15px', 
+              background: 'linear-gradient(135deg, #00c2cb, #2575fc)', 
+              color: 'white', 
+              fontSize: '20px', 
+              boxShadow: '0 5px 15px rgba(0, 194, 203, 0.2)' 
+            }}>
               <FontAwesomeIcon icon={serviceData[index].icon} />
             </div>
-            <h4>{serviceData[index].title}</h4>
-            <button className="close-expanded" onClick={closeExpandedCard}>
+            <h4 style={{ 
+              margin: '0', 
+              fontSize: '1.8rem', 
+              fontWeight: '600', 
+              color: '#333', 
+              flex: '1' 
+            }}>{serviceData[index].title}</h4>
+            <button className="close-expanded" onClick={closeExpandedCard} style={{ 
+              position: 'absolute', 
+              top: '20px', 
+              right: '20px', 
+              width: '36px', 
+              height: '36px', 
+              borderRadius: '50%', 
+              background: 'white', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              cursor: 'pointer', 
+              color: '#666', 
+              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)', 
+              transition: 'all 0.3s ease', 
+              border: 'none', 
+              zIndex: '5' 
+            }}>
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
           
-          <p>{content.intro}</p>
+          <p style={{ marginBottom: '25px', color: '#555', lineHeight: '1.8' }}>{content.intro}</p>
           
-          <div className="aspects-container">
-            <div className="aspect-section technical-aspects">
-              <h5><strong>Technical Aspects:</strong></h5>
-              <ul>
+          <div className="aspects-container" style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+            gap: '30px', 
+            marginBottom: '30px' 
+          }}>
+            <div className="aspect-section technical-aspects" style={{ 
+              background: 'white', 
+              padding: '20px', 
+              borderRadius: '15px', 
+              boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)', 
+              borderLeft: '4px solid #6a11cb' 
+            }}>
+              <h5 style={{ marginTop: '0' }}><strong>Technical Aspects:</strong></h5>
+              <ul style={{ 
+                paddingLeft: '20px', 
+                listStyleType: 'none' 
+              }}>
                 {content.technical.map((item, idx) => (
-                  <li key={`tech-${idx}`}>{item}</li>
+                  <li key={`tech-${idx}`} style={{ 
+                    position: 'relative', 
+                    padding: '8px 0 8px 30px', 
+                    marginBottom: '10px', 
+                    color: '#555', 
+                    background: 'rgba(255, 255, 255, 0.7)', 
+                    borderRadius: '10px', 
+                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.03)', 
+                    transition: 'all 0.3s ease', 
+                    borderLeft: '3px solid #6a11cb',
+                    position: 'relative'
+                  }}>
+                    <span style={{
+                      content: '✓',
+                      position: 'absolute',
+                      left: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      color: 'white',
+                      fontWeight: 'bold',
+                      width: '18px',
+                      height: '18px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '10px',
+                      background: 'linear-gradient(135deg, #6a11cb, #2575fc)'
+                    }}>✓</span>
+                    {item}
+                  </li>
                 ))}
               </ul>
             </div>
             
-            <div className="aspect-section commercial-aspects">
-              <h5><strong>Commercial Aspects:</strong></h5>
-              <ul>
+            <div className="aspect-section commercial-aspects" style={{ 
+              background: 'white', 
+              padding: '20px', 
+              borderRadius: '15px', 
+              boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)', 
+              borderLeft: '4px solid #00c2cb' 
+            }}>
+              <h5 style={{ marginTop: '0' }}><strong>Commercial Aspects:</strong></h5>
+              <ul style={{ 
+                paddingLeft: '20px', 
+                listStyleType: 'none' 
+              }}>
                 {content.commercial.map((item, idx) => (
-                  <li key={`comm-${idx}`}>{item}</li>
+                  <li key={`comm-${idx}`} style={{ 
+                    position: 'relative', 
+                    padding: '8px 0 8px 30px', 
+                    marginBottom: '10px', 
+                    color: '#555', 
+                    background: 'rgba(255, 255, 255, 0.7)', 
+                    borderRadius: '10px', 
+                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.03)', 
+                    transition: 'all 0.3s ease', 
+                    borderLeft: '3px solid #00c2cb',
+                    position: 'relative'
+                  }}>
+                    <span style={{
+                      content: '✓',
+                      position: 'absolute',
+                      left: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      color: 'white',
+                      fontWeight: 'bold',
+                      width: '18px',
+                      height: '18px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '10px',
+                      background: 'linear-gradient(135deg, #00c2cb, #2575fc)'
+                    }}>✓</span>
+                    {item}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -119,22 +250,99 @@ function Services() {
     // For all other services
     return (
       <>
-        <div className="service-expanded-title">
-          <div className="service-icon">
+        <div className="service-expanded-title" style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          marginBottom: '20px', 
+          paddingBottom: '15px', 
+          borderBottom: '1px solid rgba(0, 0, 0, 0.05)' 
+        }}>
+          <div className="service-icon" style={{ 
+            width: '50px', 
+            height: '50px', 
+            borderRadius: '10px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            marginRight: '15px', 
+            background: 'linear-gradient(135deg, #00c2cb, #2575fc)', 
+            color: 'white', 
+            fontSize: '20px', 
+            boxShadow: '0 5px 15px rgba(0, 194, 203, 0.2)' 
+          }}>
             <FontAwesomeIcon icon={serviceData[index].icon} />
           </div>
-          <h4>{serviceData[index].title}</h4>
-          <button className="close-expanded" onClick={closeExpandedCard}>
+          <h4 style={{ 
+            margin: '0', 
+            fontSize: '1.8rem', 
+            fontWeight: '600', 
+            color: '#333', 
+            flex: '1' 
+          }}>{serviceData[index].title}</h4>
+          <button className="close-expanded" onClick={closeExpandedCard} style={{ 
+            position: 'absolute', 
+            top: '20px', 
+            right: '20px', 
+            width: '36px', 
+            height: '36px', 
+            borderRadius: '50%', 
+            background: 'white', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            cursor: 'pointer', 
+            color: '#666', 
+            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)', 
+            transition: 'all 0.3s ease', 
+            border: 'none', 
+            zIndex: '5' 
+          }}>
             <FontAwesomeIcon icon={faTimes} />
           </button>
         </div>
         
-        {content.intro && <p>{content.intro}</p>}
+        {content.intro && <p style={{ marginBottom: '25px', color: '#555', lineHeight: '1.8' }}>{content.intro}</p>}
         
         {content.list && (
-          <ul>
+          <ul style={{ 
+            paddingLeft: '20px', 
+            listStyleType: 'none',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '20px'
+          }}>
             {content.list.map((item, idx) => (
-              <li key={`list-${idx}`}>{item}</li>
+              <li key={`list-${idx}`} style={{ 
+                position: 'relative', 
+                padding: '12px 15px 12px 35px', 
+                marginBottom: '10px', 
+                color: '#555', 
+                background: 'rgba(255, 255, 255, 0.7)', 
+                borderRadius: '10px', 
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.03)', 
+                transition: 'all 0.3s ease', 
+                borderLeft: '3px solid #00c2cb',
+                position: 'relative'
+              }}>
+                <span style={{
+                  content: '✓',
+                  position: 'absolute',
+                  left: '10px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  width: '18px',
+                  height: '18px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '10px',
+                  background: 'linear-gradient(135deg, #00c2cb, #2575fc)'
+                }}>✓</span>
+                {item}
+              </li>
             ))}
           </ul>
         )}
@@ -200,17 +408,17 @@ function Services() {
         };
       case 0:
         return {
-          intro: "Tangible assets with long life (which include Property, Plant & Equipment) provide economic benefits to an enterprise for a period greater than that covered by current year's financial statements. Accordingly, these assets must be Capitalized rather than immediately expensed and their costs must be allocated over the expected periods of benefit for the reporting entity.",
+          intro: "Tangible assets with long life (which include Property, Plant & Equipment) provide economic benefits to an enterprise for a period greater than that covered by current year's financial statements. Accordingly, these assets must be Capitalized rather than immediately expensed and their costs must be allocated over the expected periods of benefit for the reporting entity.VRPL carries Capitalization of the as per IFRS or as per Indian GAAP. VRPL Team goes through the records PPE and determines the amounts at which to initially record the acquisition of such assets and the appropriate methods by which to allocate the assets costs to future periods",
           technical: [
-            "Complete understanding of Products/by-products and the key inputs.",
+            "Complete understanding of:Products/by-products and the key inputs.",
             "Process & Process flow.",
             "Capacity of the plant.",
             "Configuration of various units of the plant.",
             "Operational aspects of various units.",
             "Study of Engineering drawings of each unit and confirm the bill of quantity.",
-            "Confirm that all items of each unit have been physically installed.",
+            "Confirm that the bill of quantity of items of each unit have been physically installed.",
             "Preparation of unit-wise List of Items indicating Source of Supply, Major Technical Specifications, Quantities etc.",
-            "Identifying the Components as per Sch II of the Companies Act 2013 for Useful Life and Residual Value."
+            "Identifying the item from Sch II of the Companies Act 2013 for Useful Life and Residual Value."
           ],
           commercial: [
             "Review of Purchase Orders, Contracts & Agreements to identify item-wise costs.",
@@ -223,28 +431,32 @@ function Services() {
         };
       case 1:
         return {
+          intro: "Our valuation of fixed assets follows a comprehensive approach to determine accurate asset values.",
           list: [
             "Site Visit for Physical Observation.",
-            "Selection of appropriate Valuation Approach (namely: Market Approach/ Cost Approach/ Income Approach).",
-            "Obtain Replacement Cost New (RCN) or Historical Cost and Commissioning Date.",
+            "Selection of appropriate Valuation Approach, namely Market Approach, Cost Approach & Income Approach).",
+            "Obtain historical costs, if available.",
             "Consider factors for Obsolescence (Physical/ Technical/ Economic)."
           ]
         };
       case 2:
         return {
+          intro: "Our verification services ensure accurate inventory and asset records through thorough inspection methods.",
           list: [
             "Site visit for Physical Observation.",
-            "Verification of all Assets and classifying as: Available/ Partly Available/ Discarded/ Transferred to other Units etc.",
+            "Verification of both types of inventories, namely Project Inventory and store Inventory",
             "Reconciliation of Assets with Customer's Fixed Assets Register (FAR).",
-            "Supply of Metallic/ Paper Tags based on Customer Requirement."
+            "Tagging of Assets based on Customer Requirement"
           ]
         };
       case 3:
         return {
+          intro: "We conduct comprehensive technical assessments to determine the balance useful life of assets through multiple evaluation methods.",
           list: [
             "Site Visit for Physical Inspection.",
-            "Study of Maintenance Philosophy/ Production Records/ Product Quality Records/ Statistical Evaluation.",
-            "Adherence to relevant Standards and Normal Industry Practices."
+            "Study of Maintenance Records",
+            "Study of Production Records",
+            "Statistical Evaluation"
           ]
         };
       case 4:
@@ -294,6 +506,7 @@ function Services() {
         };
       case 8:
         return {
+          intro: "Our project monitoring services provide comprehensive oversight and management for your projects:",
           list: [
             "Services are offered to the clients in the areas of Preparation of Project brief, Project Programming including defining Milestones and Deliverables, Procurement Strategy, Selection of Vendors/ Suppliers/ Contractors, Project Time Management, Materials Management, Construction/ Installation Supervision, Site Staffing, Site Administration, Monitor Project Construction programs, Quality Control, Reporting, Commissioning & Close Out."
           ]
@@ -431,6 +644,7 @@ function Services() {
     <div className="services-page">
       {/* Hero Section */}
       <section className={`services-hero ${isVisible ? 'visible' : ''}`}>
+        <BannerLogo />
         <div className="hero-backdrop"></div>
         <div className="container">
           <div className="hero-content">
@@ -643,28 +857,63 @@ function Services() {
                         className={`service-card ${hoveredCard === index ? 'active' : ''} ${service.color}`}
                         onMouseEnter={() => setHoveredCard(index)}
                         onMouseLeave={() => setHoveredCard(null)}
+                        style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column' }}
                       >
                         <div className="click-here-indicator">
                           <FontAwesomeIcon icon={faHandPointer} />
                           <span>Hover here</span>
                         </div>
-                        <div className="card-content">
+                        <div className="card-content" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                           <div className="card-front">
                             <div className="service-icon">
                               <FontAwesomeIcon icon={service.icon} />
                             </div>
                             <h4>{service.title}</h4>
                           </div>
-                          <div className="card-back">
-                            <p>{service.description}</p>
-                            <button 
-                              className="show-more-btn"
-                              onClick={(e) => toggleExpandCard(index, e)}
-                            >
-                              <FontAwesomeIcon icon={faInfoCircle} className="info-icon" />
-                              {expandedCards.includes(index) ? "Hide Details" : "Show Details"} 
-                              <FontAwesomeIcon icon={faAngleRight} />
-                            </button>
+                          <div className="card-back" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+                            <p style={{ 
+                              marginBottom: '10px', 
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                              maxHeight: '120px'
+                            }}>{service.description}</p>
+                            <div style={{ 
+                              textAlign: 'center', 
+                              padding: '10px 0',
+                              width: '100%',
+                              marginTop: 'auto',
+                              position: 'relative',
+                              zIndex: 5
+                            }}>
+                              <button 
+                                className="show-more-btn"
+                                onClick={(e) => toggleExpandCard(index, e)}
+                                style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  gap: '10px',
+                                  padding: '12px 25px',
+                                  background: 'rgba(0, 194, 203, 0.2)',
+                                  border: '2px solid rgba(0, 194, 203, 0.5)',
+                                  borderRadius: '50px',
+                                  color: '#00c2cb',
+                                  fontWeight: '700',
+                                  transition: 'all 0.3s ease',
+                                  cursor: 'pointer',
+                                  fontSize: '1rem',
+                                  width: '90%',
+                                  boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+                                  margin: '0 auto',
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.5px'
+                                }}
+                              >
+                                <FontAwesomeIcon icon={faInfoCircle} className="info-icon" />
+                                {expandedCards.includes(index) ? "Hide Details" : "View Details"} 
+                                <FontAwesomeIcon icon={faAngleRight} />
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -680,8 +929,28 @@ function Services() {
                   <div 
                     className={`service-details-expanded ${animationClass}`}
                     data-service={expandedCards.find(index => Math.floor(index / 3) === rowIndex)}
+                    style={{
+                      gridColumn: '1 / -1',
+                      marginTop: '20px',
+                      marginBottom: '40px',
+                      padding: '0',
+                      background: '#ffffff',
+                      borderRadius: '20px',
+                      boxShadow: '0 15px 40px rgba(0, 0, 0, 0.08)',
+                      color: '#333333',
+                      lineHeight: '1.8',
+                      width: '100%',
+                      position: 'relative',
+                      zIndex: '10',
+                      overflow: 'hidden',
+                      border: 'none',
+                      display: 'block',
+                      opacity: '1',
+                      height: 'auto',
+                      minHeight: '200px'
+                    }}
                   >
-                    <div className="expanded-content">
+                    <div className="expanded-content" style={{ padding: '30px', position: 'relative', zIndex: '2' }}>
                       {renderFormattedContent(expandedCards.find(index => 
                         Math.floor(index / 3) === rowIndex
                       ))}
