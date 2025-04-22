@@ -162,7 +162,7 @@ function Services() {
                 {content.technical.map((item, idx) => (
                   <li key={`tech-${idx}`} style={{ 
                     position: 'relative', 
-                    padding: '8px 0 8px 30px', 
+                    padding: '8px 0 8px 15px', 
                     marginBottom: '10px', 
                     color: '#555', 
                     background: 'rgba(255, 255, 255, 0.7)', 
@@ -172,23 +172,6 @@ function Services() {
                     borderLeft: '3px solid #6a11cb',
                     position: 'relative'
                   }}>
-                    <span style={{
-                      content: '✓',
-                      position: 'absolute',
-                      left: '10px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      color: 'white',
-                      fontWeight: 'bold',
-                      width: '18px',
-                      height: '18px',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '10px',
-                      background: 'linear-gradient(135deg, #6a11cb, #2575fc)'
-                    }}>✓</span>
                     {item}
                   </li>
                 ))}
@@ -210,7 +193,7 @@ function Services() {
                 {content.commercial.map((item, idx) => (
                   <li key={`comm-${idx}`} style={{ 
                     position: 'relative', 
-                    padding: '8px 0 8px 30px', 
+                    padding: '8px 0 8px 15px', 
                     marginBottom: '10px', 
                     color: '#555', 
                     background: 'rgba(255, 255, 255, 0.7)', 
@@ -220,23 +203,6 @@ function Services() {
                     borderLeft: '3px solid #00c2cb',
                     position: 'relative'
                   }}>
-                    <span style={{
-                      content: '✓',
-                      position: 'absolute',
-                      left: '10px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      color: 'white',
-                      fontWeight: 'bold',
-                      width: '18px',
-                      height: '18px',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '10px',
-                      background: 'linear-gradient(135deg, #00c2cb, #2575fc)'
-                    }}>✓</span>
                     {item}
                   </li>
                 ))}
@@ -314,7 +280,7 @@ function Services() {
             {content.list.map((item, idx) => (
               <li key={`list-${idx}`} style={{ 
                 position: 'relative', 
-                padding: '12px 15px 12px 35px', 
+                padding: '12px 15px', 
                 marginBottom: '10px', 
                 color: '#555', 
                 background: 'rgba(255, 255, 255, 0.7)', 
@@ -324,23 +290,6 @@ function Services() {
                 borderLeft: '3px solid #00c2cb',
                 position: 'relative'
               }}>
-                <span style={{
-                  content: '✓',
-                  position: 'absolute',
-                  left: '10px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  width: '18px',
-                  height: '18px',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '10px',
-                  background: 'linear-gradient(135deg, #00c2cb, #2575fc)'
-                }}>✓</span>
                 {item}
               </li>
             ))}
